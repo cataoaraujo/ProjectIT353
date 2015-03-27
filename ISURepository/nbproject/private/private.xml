@@ -4,10 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/ProjectIT353/ISURepository/web/index.xhtml</file>
-            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/ProjectIT353/ISURepository/web/templates/sidebar.xhtml</file>
+            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/ProjectIT353/ISURepository/web/resources/css/theme.css</file>
+            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/ProjectIT353/ISURepository/web/resources/bootstrap/css/bootstrap.min.css</file>
             <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/ProjectIT353/ISURepository/web/templates/content.xhtml</file>
-            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/ProjectIT353/ISURepository/web/templates/footer.xhtml</file>
-            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/ProjectIT353/ISURepository/web/templates/nav.xhtml</file>
+            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/ProjectIT353/ISURepository/web/signup.xhtml</file>
         </group>
     </open-files>
 </project-private>
