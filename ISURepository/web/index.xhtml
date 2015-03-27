@@ -6,50 +6,27 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <ui:composition template="/templates/content.xhtml">
-        
-         <ui:define name="nav">
+
+        <ui:define name="nav">
             <ui:include src="templates/nav.xhtml"/>
-         </ui:define>
-               
+        </ui:define>
+
         <ui:define name="sidebar">
             <ui:include src="templates/sidebar.xhtml"/>
         </ui:define>
-        
+
         <ui:define name="content">
 
             <div class="span9">
                 <div class="content">
                     <div class="module">
                         <div class="module-head">
-                            <h3>News Feed</h3>
+                            <h3>Highlighted Projects</h3>
                         </div>
                         <div class="module-body">
-                            <div class="stream-composer media">
-                                <a href="#" class="media-avatar medium pull-left">
-                                    <img src="resources/images/user.png" />
-                                </a>
-                                <div class="media-body">
-                                    <div class="row-fluid">
-                                        <textarea class="span12" style="height: 70px; resize: none;"></textarea>
-                                    </div>
-                                    <div class="clearfix">
-                                        <a href="#" class="btn btn-primary pull-right">
-                                            Update Status
-                                        </a>
-                                        <a href="#" class="btn btn-small" rel="tooltip" data-placement="top" data-original-title="Upload a photo">
-                                            <i class="icon-camera shaded"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-small" rel="tooltip" data-placement="top" data-original-title="Upload a video">
-                                            <i class="icon-facetime-video shaded"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-small" rel="tooltip" data-placement="top" data-original-title="Pin your location">
-                                            <i class="icon-map-marker shaded"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="stream-list">
+
+                                <!-- REPETED PART -->
                                 <div class="media stream">
                                     <a href="#" class="media-avatar medium pull-left">
                                         <img src="resources/images/user.png" />
@@ -57,36 +34,123 @@
                                     <div class="media-body">
                                         <div class="stream-headline">
                                             <h5 class="stream-author">
-                                                John Donga 
-                                                <small>08 July, 2014</small>
+                                                Title of the project
+                                                <small>Autor name</small>
                                             </h5>
                                             <div class="stream-text">
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. 
+                                                <p>Abstract Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </p>
+                                                <p>Abstract Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </p>
                                             </div>
-                                            <div class="stream-attachment photo">
-                                                <div class="responsive-photo">
-                                                    <img src="resources/images/img.jpg" />
-                                                </div>
+                                            <div class="stream-text">
+                                                <ol class="inline">
+                                                    <li><a href="#">#keyword</a></li>
+                                                    <li><a href="#">#keyword</a></li>
+                                                    <li><a href="#">#keyword</a></li>
+                                                    <li><a href="#">#keyword</a></li>
+                                                    <li><a href="#">#keyword</a></li>
+                                                </ol>
                                             </div>
-                                        </div><!--/.stream-headline-->
-
+                                        </div>
                                         <div class="stream-options">
                                             <a href="#" class="btn btn-small">
-                                                <i class="icon-thumbs-up shaded"></i>
-                                                Like
+                                                <i class="icon-cloud shaded"></i>
+                                                Live version
                                             </a>
                                             <a href="#" class="btn btn-small">
                                                 <i class="icon-reply shaded"></i>
-                                                Reply
+                                                Export
                                             </a>
                                             <a href="#" class="btn btn-small">
-                                                <i class="icon-retweet shaded"></i>
-                                                Repost
+                                                <i class="icon-plus shaded"></i>
+                                                More details
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-
+                                
+                                 <div class="media stream">
+                                    <a href="#" class="media-avatar medium pull-left">
+                                        <img src="resources/images/user.png" />
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="stream-headline">
+                                            <h5 class="stream-author">
+                                                Title of the project
+                                                <small>Autor name</small>
+                                            </h5>
+                                            <div class="stream-text">
+                                                <p>Abstract Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </p>
+                                                <p>Abstract Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </p>
+                                            </div>
+                                            <div class="stream-text">
+                                                <ol class="inline">
+                                                    <li><a href="#">#keyword</a></li>
+                                                    <li><a href="#">#keyword</a></li>
+                                                    <li><a href="#">#keyword</a></li>
+                                                    <li><a href="#">#keyword</a></li>
+                                                    <li><a href="#">#keyword</a></li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                        <div class="stream-options">
+                                            <a href="#" class="btn btn-small">
+                                                <i class="icon-cloud shaded"></i>
+                                                Live version
+                                            </a>
+                                            <a href="#" class="btn btn-small">
+                                                <i class="icon-reply shaded"></i>
+                                                Export
+                                            </a>
+                                            <a href="#" class="btn btn-small">
+                                                <i class="icon-plus shaded"></i>
+                                                More details
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                 <div class="media stream">
+                                    <a href="#" class="media-avatar medium pull-left">
+                                        <img src="resources/images/user.png" />
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="stream-headline">
+                                            <h5 class="stream-author">
+                                                Title of the project
+                                                <small>Autor name</small>
+                                            </h5>
+                                            <div class="stream-text">
+                                                <p>Abstract Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </p>
+                                                <p>Abstract Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </p>
+                                            </div>
+                                            <div class="stream-text">
+                                                <ol class="inline">
+                                                    <li><a href="#">#keyword</a></li>
+                                                    <li><a href="#">#keyword</a></li>
+                                                    <li><a href="#">#keyword</a></li>
+                                                    <li><a href="#">#keyword</a></li>
+                                                    <li><a href="#">#keyword</a></li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                        <div class="stream-options">
+                                            <a href="#" class="btn btn-small">
+                                                <i class="icon-cloud shaded"></i>
+                                                Live version
+                                            </a>
+                                            <a href="#" class="btn btn-small">
+                                                <i class="icon-reply shaded"></i>
+                                                Export
+                                            </a>
+                                            <a href="#" class="btn btn-small">
+                                                <i class="icon-plus shaded"></i>
+                                                More details
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END REPETED PART -->
+                                
                                 <div class="media stream load-more">
                                     <a href="#">
                                         <i class="icon-refresh shaded"></i>
@@ -102,5 +166,5 @@
 
         </ui:define>
     </ui:composition>
-    
+
 </html>
