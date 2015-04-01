@@ -6,10 +6,15 @@ Database
 
 # Use Cases
 
+# Rodrigo
 --> Sign-in User
 
 --> Sign up Account (must wait for approval before signing in)
 Details: First Name, Last Name, UserID (check for existence), Password, Confirm Password, Email (must be ISU's), Security Question, Security Answer, Reason for an Account
+
+
+----------------------------------------------------
+
 
 --> add Thesis/Project (including live link to run a project) (details to include forthcoming)
 Details: Course #, live link, keywords, abstract, documentation in Word/PDF, screencast link/file, committee chair & members, semester completed (pre-filled: student name(s), date uploaded) 
@@ -30,8 +35,6 @@ Details: Course #, live link, keywords, abstract, documentation in Word/PDF, scr
 
 --> Download Thesis/Project
 
---> Approve Account <== Admin only
-
 --> Export Thesis/Project (to XML/JSON format)
 
 --> Subscribe to Thesis/Project mailing (based on keywords, etc.)
@@ -47,3 +50,5 @@ Details: Course #, live link, keywords, abstract, documentation in Word/PDF, scr
 --> Mark Thesis/Project for showcase <== Admin only
 
 --> Retrieve lost password
+
+--> Approve Account <== Admin only
