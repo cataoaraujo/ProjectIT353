@@ -23,41 +23,46 @@
                         <h3>Sign Up</h3>
                     </div>
                     <div class="module-body">
-                        <form class="form-horizontal row-fluid">
+                        <h:form class="form-horizontal row-fluid">
                             <div class="control-group">
-                                <label class="control-label" for="fname">First Name:</label>
+                                <label class="control-label" for="firstName">First Name:</label>
                                 <div class="controls">
-                                    <input type="text" id="fname" class="span5" />
+                                    <h:inputText id="firstName" class="span5" value="#{userController.user.firstName}" required="true"/>
                                 </div>
-                                <label class="control-label" for="lname">Last Name:</label>
+                                <label class="control-label" for="lastName">Last Name:</label>
                                 <div class="controls">
-                                    <input type="text" id="lname" class="span5" />
+                                    <h:inputText id="lastName" class="span5" value="#{userController.user.lastName}" required="true"/>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label" for="uid">UserID:</label>
+                                <label class="control-label" for="userID">UserID:</label>
                                 <div class="controls">
                                     <div class="input-append">
-                                        <input type="text" id="uid" class="span5" />
+                                        <h:inputText id="userID" class="span5" value="#{userController.user.userID}" required="true">
+                                            <f:validator validatorId="userIDValidator" />
+                                        </h:inputText>
                                     </div>
                                 </div>
                                 <label class="control-label" for="email">Email:</label>
                                 <div class="controls">
                                     <div class="input-append">
-                                        <input type="text" id="email" class="span4" /><span class="add-on">@ilstu.edu</span>
+                                        <h:inputText id="email" class="span4" value="#{userController.user.email}" required="true"/><span class="add-on">@ilstu.edu</span>
                                     </div>
                                 </div>
                                 <label class="control-label" for="password">Password:</label>
                                 <div class="controls">
                                     <div class="input-append">
-                                        <input type="text" id="password" class="span5" />
+                                        <h:inputSecret id="password" class="span5" value="#{userController.user.password}" required="true">
+                                            <f:validator validatorId="passwordValidator" />
+                                            <f:attribute name="confirmPassword" value="#{confirmPassword}" />
+                                        </h:inputSecret>
                                     </div>
                                 </div>
                                 <label class="control-label" for="cpassword">Confirm Password:</label>
                                 <div class="controls">
                                     <div class="input-append">
-                                        <input type="text" id="cpassword" class="span5" />
+                                        <h:inputSecret id="cpassword" class="span5" binding="#{confirmPassword}" required="true" />
                                     </div>
                                 </div>
                             </div>
@@ -65,26 +70,26 @@
                             <div class="control-group">
                                 <label class="control-label" for="squestion">Security Question:</label>
                                 <div class="controls">
-                                    <input type="text" id="squestion" class="span5" />
+                                    <h:inputText id="squestion" class="span5" value="#{userController.user.securityQuestion}" required="true"/>
                                 </div>
                                 <label class="control-label" for="sanswer">Security Answer:</label>
                                 <div class="controls">
-                                    <input type="text" id="sanswer" class="span5" />
+                                    <h:inputText id="sanswer" class="span5" value="#{userController.user.securityAnswer}" required="true"/>
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <label class="control-label" for="basicinput">Reason for an Account</label>
                                 <div class="controls">
-                                    <textarea class="span5" rows="5"></textarea>
+                                    <h:inputTextarea id="basicinput" rows="4" cols="7" value="#{userController.user.accountReason}" required="true"/>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="controls clearfix">
-                                    <button type="submit" class="btn btn pull-right btn-large btn-success">Sign Up</button>
+                                    <h:commandButton class="btn btn pull-right btn-large btn-success" value="Sign Up" action="#{userController.createUser()}"/>
                                 </div>
                             </div>
-                        </form>
+                        </h:form>
                     </div>
                 </form>
             </div>

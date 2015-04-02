@@ -47,7 +47,7 @@ public class User {
     public boolean add(){
         Connection conn = Database.connect2DB();
         try {
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO UserAccount VALUES (?, ?, ?, ?, ?, ? , ?, ?, ?, ?)");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO UserAccount VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?, 'user', false)");
             ps.setString(1, firstName);
             ps.setString(2, lastName);
             ps.setString(3, userID);
@@ -56,8 +56,8 @@ public class User {
             ps.setString(6, securityQuestion);
             ps.setString(7, securityAnswer);
             ps.setString(8, accountReason);
-            ps.setString(9, type);
-            ps.setBoolean(10, accountApproval);
+            //ps.setString(9, type);
+            //ps.setBoolean(10, accountApproval);
             if(ps.executeUpdate() == 1){
                 return true;
             }
@@ -94,7 +94,7 @@ public class User {
         User u = null;
         Connection conn = Database.connect2DB();
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM UserAccount WHERE userID = ? AND password = ?");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM UserAccount WHERE userID = ? AND password = ? AND accountApproval = True");
             ps.setString(1, userID);
             ps.setString(2, password);
             ResultSet result = ps.executeQuery();
@@ -107,6 +107,9 @@ public class User {
                u.setEmail(result.getString("email"));
                u.setSecurityQuestion(result.getString("securityQuestion"));
                u.setSecurityAnswer(result.getString("securityAnswer"));
+               u.setAccountReason(result.getString("accountReason"));
+               u.setType(result.getString("type"));
+               u.setAccountApproval(result.getBoolean("accountApproval"));
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
@@ -118,7 +121,7 @@ public class User {
         accountApproval = true;
         return update();
     }
-    
+
     public int getId() {
         return id;
     }
@@ -207,5 +210,5 @@ public class User {
         this.accountApproval = accountApproval;
     }
     
-    
+   
 }

@@ -18,26 +18,26 @@
         <ui:define name="content">
 
             <div class="module module-login span4 offset4">
-                <form class="form-vertical">
+                <h:form class="form-vertical">
                     <div class="module-head">
                         <h3>Sign In</h3>
                     </div>
                     <div class="module-body">
                         <div class="control-group">
                             <div class="controls row-fluid">
-                                <input class="span12" type="text" id="inputEmail" placeholder="Username" />
+                                <h:inputText class="span12" id="inputUserID" value="#{userController.user.userID}"/>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="controls row-fluid">
-                                <input class="span12" type="password" id="inputPassword" placeholder="Password" />
+                                <h:inputSecret class="span12" id="inputPassword" value="#{userController.user.password}"/>
                             </div>
                         </div>
                     </div>
                     <div class="module-foot">
                         <div class="control-group">
                             <div class="controls clearfix">
-                                <button type="submit" class="btn btn pull-right btn-large btn-success">Login</button>
+                                <h:commandButton class="btn btn pull-right btn-large btn-success" value="Sign In" action="#{userController.login()}"/>
                                 <label class="checkbox">
                                     <input type="checkbox" /> Remember me
                                 </label>
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                </h:form>
             </div>
 
         </ui:define>

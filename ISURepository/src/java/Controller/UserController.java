@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Controller;
 
 import Model.User;
@@ -20,11 +19,15 @@ import javax.mail.internet.MimeMessage;
 @ManagedBean
 @SessionScoped
 public class UserController {
-    
+
     private User user;
     private int attempts;
     private String msg;
     private boolean logged;
+
+    public UserController() {
+        user = new User();
+    }
 
     public User getUser() {
         return user;
@@ -33,7 +36,7 @@ public class UserController {
     public void setUser(User user) {
         this.user = user;
     }
-    
+
     public String getMsg() {
         return msg;
     }
@@ -41,16 +44,14 @@ public class UserController {
     public void setMsg(String msg) {
         this.msg = msg;
     }
-    
+
     public String createUser() {
-        if (user.verifyUserID()) {
-            if (user.add()) {
-                //sendEmail();
-                logged = true;
-                return "echo.xhtml";
-            }
+        if (user.add()) {
+            //sendEmail();
+            logged = true;
+            return "index.xhtml";
         }
-        return "signUp.xhtml";
+        return "signup.xhtml";
     }
 
     public String login() {
@@ -60,19 +61,19 @@ public class UserController {
                 user = u;
                 logged = true;
                 attempts = 0;
-                return "LoginGood.xhtml";
+                return "index.xhtml";
             } else {
                 attempts++;
                 msg = "Wrong UserID or Password!";
-                return "LoginBad.xhtml";
+                return "error.xhtml";
             }
         }
         msg = "You are limited to a max of 3 attempts per session, try again later!";
-        return "LoginBad.xhtml";
+        return "error.xhtml";
     }
-    
-    public String update(){
-        if(user.update()){
+
+    public String update() {
+        if (user.update()) {
             return "update.xhtml";
         }
         return "error.xhtml";
@@ -133,10 +134,11 @@ public class UserController {
 
     }
 
-    public void logoff(){
+    public void logoff() {
         user = new User();
         logged = false;
     }
+
     public boolean isLogged() {
         return logged;
     }
