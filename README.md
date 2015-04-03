@@ -4,51 +4,57 @@ Database
 
 ![alt tag](https://raw.githubusercontent.com/j3gu3/ProjectIT353/master/db4.png)
 
+
 # Use Cases
 
-# Rodrigo
---> Sign-in User
+## Rodrigo
+* [x] Sign-in User
 
---> Sign up Account (must wait for approval before signing in)
-Details: First Name, Last Name, UserID (check for existence), Password, Confirm Password, Email (must be ISU's), Security Question, Security Answer, Reason for an Account
-
-
-----------------------------------------------------
+* [x] Sign up Account (must wait for approval before signing in) Details: First Name, Last Name, UserID (check for existence), Password, Confirm Password, Email (must be ISU's), Security Question, Security Answer, Reason for an Account
 
 
---> add Thesis/Project (including live link to run a project) (details to include forthcoming)
-Details: Course #, live link, keywords, abstract, documentation in Word/PDF, screencast link/file, committee chair & members, semester completed (pre-filled: student name(s), date uploaded) 
+## Tim
 
---> *Setup Routing Chain (order in which approval is processed) <== Admin only
+* ?
 
---> **Request for / Route Approval
+## Gabriel
 
---> Check Approval Status
+* ?
 
---> Search for Thesis/Project
+## Use Cases not in progress
 
---> View Details (of a Thesis/Project)
+* [ ] add Thesis/Project (including live link to run a project) (details to include forthcoming) Details: Course #, live link, keywords, abstract, documentation in Word/PDF, screencast link/file, committee chair & members, semester completed (pre-filled: student name(s), date uploaded) 
 
---> Update Details (of a Thesis/Project)
+* [ ] Setup Routing Chain (order in which approval is processed) <== Admin only
 
---> Show Similar Thesis/Project
+* [ ] Request for / Route Approval
 
---> Download Thesis/Project
+* [ ] Check Approval Status
 
---> Export Thesis/Project (to XML/JSON format)
+* [ ] Search for Thesis/Project
 
---> Subscribe to Thesis/Project mailing (based on keywords, etc.)
+* [ ] View Details (of a Thesis/Project)
 
---> Unsubscribe from Mailing
+* [ ] Update Details (of a Thesis/Project)
 
---> Print Flyer (for postings at committee members' offices) <== Admin only
+* [ ] Show Similar Thesis/Project
 
---> Enable Dashboard (to show various reports (e.g., most viewed Theses/Projects, most downloaded, list of Theses/Projects for a specified date range, etc.)) <== Admin only
+* [ ] Download Thesis/Project
 
---> Highlight/Showcase Thesis/Project 
+* [ ] Export Thesis/Project (to XML/JSON format)
 
---> Mark Thesis/Project for showcase <== Admin only
+* [ ] Subscribe to Thesis/Project mailing (based on keywords, etc.)
 
---> Retrieve lost password
+* [ ] Unsubscribe from Mailing
 
---> Approve Account <== Admin only
+* [ ] Print Flyer (for postings at committee members' offices) <== Admin only
+
+* [ ] Enable Dashboard (to show various reports (e.g., most viewed Theses/Projects, most downloaded, list of Theses/Projects for a specified date range, etc.)) <== Admin only
+
+* [ ] Highlight/Showcase Thesis/Project 
+
+* [ ] Mark Thesis/Project for showcase <== Admin only
+
+* [ ] Retrieve lost password
+
+* [ ] Approve Account <== Admin only
