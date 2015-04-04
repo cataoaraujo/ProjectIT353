@@ -74,7 +74,7 @@ public class UserController {
 
     public String update() {
         if (user.update()) {
-            return "update.xhtml";
+            return "profile.xhtml";
         }
         return "error.xhtml";
     }

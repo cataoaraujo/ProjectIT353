@@ -70,7 +70,7 @@ public class User {
     public boolean update(){
         Connection conn = Database.connect2DB();
         try {
-            PreparedStatement ps = conn.prepareStatement("UPDATE UserAccount SET firstName = ?, lastName = ?, password = ?, email = ?, securityQuestion = ?, securityAnswer = ?, accountReason = ?, type = ?, accountAprroval = ? WHERE userID = ?");
+            PreparedStatement ps = conn.prepareStatement("UPDATE UserAccount SET firstName = ?, lastName = ?, password = ?, email = ?, securityQuestion = ?, securityAnswer = ?, accountReason = ?, accountApproval = ? WHERE userID = ?");
             ps.setString(1, firstName);
             ps.setString(2, lastName);
             ps.setString(3, password);
@@ -78,9 +78,8 @@ public class User {
             ps.setString(5, securityQuestion);
             ps.setString(6, securityAnswer);
             ps.setString(7, accountReason);
-            ps.setString(8, type);
-            ps.setBoolean(9, accountApproval);
-            ps.setString(10, userID);
+            ps.setBoolean(8, accountApproval);
+            ps.setString(9, userID);
             if(ps.executeUpdate() == 1){
                 return true;
             }
