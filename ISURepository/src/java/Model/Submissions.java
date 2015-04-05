@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author it3530203
  */
-class Submissions {
+public class Submissions {
     private int id;
     private Project project;
     private Document document;

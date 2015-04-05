@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -28,6 +30,8 @@ public class User {
     private String accountReason;
     private String type;
     private boolean accountApproval;
+    
+    private ArrayList<Project> projects = new ArrayList<>();
 
     public boolean verifyUserID(){
         Connection conn = Database.connect2DB();
@@ -47,7 +51,7 @@ public class User {
     public boolean add(){
         Connection conn = Database.connect2DB();
         try {
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO UserAccount VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?, 'user', false)");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO UserAccount VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?, 'user', false)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, firstName);
             ps.setString(2, lastName);
             ps.setString(3, userID);
@@ -59,6 +63,11 @@ public class User {
             //ps.setString(9, type);
             //ps.setBoolean(10, accountApproval);
             if(ps.executeUpdate() == 1){
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        id = rs.getInt(1);
+                    }
+                }
                 return true;
             }
         } catch (SQLException ex) {
@@ -99,6 +108,7 @@ public class User {
             ResultSet result = ps.executeQuery();
             if(result.next()){
                u = new User();
+               u.setId(result.getInt("id"));
                u.setFirstName(result.getString("firstName"));
                u.setLastName(result.getString("lastName"));
                u.setUserID(result.getString("userID"));

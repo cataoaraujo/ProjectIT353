@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/templates/content.xhtml">
+
+        <ui:define name="nav">
+            <ui:include src="/secure/navLogged.xhtml"/>
+        </ui:define>
+
+        <ui:define name="sidebar">
+            <ui:include src="/secure/sidebarSecure.xhtml"/>
+        </ui:define>
+
+        <ui:define name="content">
+
+            <div class="module span8">
+                <form class="form-vertical">
+                    <div class="module-head">
+                        <h3>New Project</h3>
+                    </div>
+                    <div class="module-body">
+                        <h:form class="form-horizontal row-fluid">
+                            <div class="control-group">
+                                <label class="control-label" for="projectName">Project Name:</label>
+                                <div class="controls">
+                                    <h:inputText id="projectName" class="span5" value="#{projectController.project.name}" required="true"/>
+                                </div>
+                                <label class="control-label" for="abstract">Abstract:</label>
+                                <div class="controls">
+                                    <h:inputTextarea id="abstract" rows="4" cols="7" value="#{projectController.project.projectAbstract}" required="true"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="courseNumber">Course Number:</label>
+                                <div class="controls">
+                                    <h:inputText id="courseNumber" class="span5" value="#{projectController.project.courseNumber}" required="true"/>
+                                </div>
+                                <label class="control-label" for="semester">Semester</label>
+                                <div class="controls">
+                                    <h:inputText id="semester" class="span5" value="#{projectController.project.semester}" required="true"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="liveLink">Live Link:</label>
+                                <div class="controls">
+                                    <h:inputText id="liveLink" class="span5" value="#{projectController.project.liveLink}" required="true" />
+                                </div>
+                                <label class="control-label" for="screencastLink">Screencast Link:</label>
+                                <div class="controls">
+                                    <h:inputText id="screencastLink" class="span5" value="#{projectController.project.screencastLink}" required="true"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="committeeChar">Committee Chair:</label>
+                                <div class="controls">
+                                    <h:inputText id="committeeChar" class="span5" value="#{projectController.committeeChair}" required="true" />
+                                </div>
+                                <label class="control-label" for="committeeCharEmail">Committee Chair Email:</label>
+                                <div class="controls">
+                                    <h:inputText id="committeeCharEmail" class="span5" value="#{projectController.committeeChairEmail}" required="true" />
+                                </div>
+                                <label class="control-label" for="committeeMember1">Committee Member 1:</label>
+                                <div class="controls">
+                                    <h:inputText id="committeeMember1" class="span5" value="#{projectController.committeeMember1}" required="true" />
+                                </div>
+                                <label class="control-label" for="committeeMember1Email">Committee Member 1 Email:</label>
+                                <div class="controls">
+                                    <h:inputText id="committeeMember1Email" class="span5" value="#{projectController.committeeMember1Email}" required="true" />
+                                </div>
+                                <label class="control-label" for="committeeMember2">Committee Member 2:</label>
+                                <div class="controls">
+                                    <h:inputText id="committeeMember2" class="span5" value="#{projectController.committeeMember2}" required="true" />
+                                </div>
+                                <label class="control-label" for="committeeMember2Email">Committee Member 2 Email:</label>
+                                <div class="controls">
+                                    <h:inputText id="committeeMember2Email" class="span5" value="#{projectController.committeeMember2Email}" required="true" />
+                                </div>
+                                <label class="control-label" for="graduateAdvisor">Graduate Advisor:</label>
+                                <div class="controls">
+                                    <h:inputText id="graduateAdvisor" class="span5" value="#{projectController.committeeAdvisor}" required="true" />
+                                </div>
+                                <label class="control-label" for="graduateAdvisorEmail">Graduate Advisor Email:</label>
+                                <div class="controls">
+                                    <h:inputText id="graduateAdvisorEmail" class="span5" value="#{projectController.committeeAdvisorEmail}" required="true" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="controls clearfix">
+                                    <h:commandButton class="btn btn pull-left btn-large btn-success" value="Create Project" action="#{projectController.create()}"/>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </form>
+            </div>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

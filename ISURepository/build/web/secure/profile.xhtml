@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/templates/content.xhtml">
+
+        <ui:define name="nav">
+            <ui:include src="/secure/navLogged.xhtml"/>
+        </ui:define>
+
+        <ui:define name="sidebar">
+             <ui:include src="/secure/sidebarSecure.xhtml"/>
+        </ui:define>
+
+        <ui:define name="content">
+            <div class="span9">
+                <div class="content">
+                    <div class="module">
+                        <div class="module-head">
+                            <h3>User Informations:</h3>
+                        </div>
+                        <div class="module-body">
+                            <form class="form-vertical">
+                                <h:form class="form-horizontal row-fluid">
+                                    <div class="control-group">
+                                        <label class="control-label" for="firstName">First Name:</label>
+                                        <div class="controls">
+                                            <h:inputText id="firstName" class="span5" value="#{userController.user.firstName}" required="true"/>
+                                        </div>
+                                        <label class="control-label" for="lastName">Last Name:</label>
+                                        <div class="controls">
+                                            <h:inputText id="lastName" class="span5" value="#{userController.user.lastName}" required="true"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="userID">UserID:</label>
+                                        <div class="controls">
+                                            <div class="input-append">
+                                                <h:inputText id="userID" disabled="true" class="span5" value="#{userController.user.userID}" required="true">
+                                                </h:inputText>
+                                            </div>
+                                        </div>
+                                        <label class="control-label" for="email">Email:</label>
+                                        <div class="controls">
+                                            <div class="input-append">
+                                                <h:inputText id="email" class="span4" value="#{userController.user.email}" required="true"/><span class="add-on">@ilstu.edu</span>
+                                            </div>
+                                        </div>
+                                        <label class="control-label" for="password">Password:</label>
+                                        <div class="controls">
+                                            <div class="input-append">
+                                                <h:inputSecret id="password" class="span5" value="#{userController.user.password}" required="true">
+                                                    <f:validator validatorId="passwordValidator" />
+                                                    <f:attribute name="confirmPassword" value="#{confirmPassword}" />
+                                                </h:inputSecret>
+                                            </div>
+                                        </div>
+                                        <label class="control-label" for="cpassword">Confirm Password:</label>
+                                        <div class="controls">
+                                            <div class="input-append">
+                                                <h:inputSecret id="cpassword" class="span5" binding="#{confirmPassword}" required="true" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="squestion">Security Question:</label>
+                                        <div class="controls">
+                                            <h:inputText id="squestion" class="span5" value="#{userController.user.securityQuestion}" required="true"/>
+                                        </div>
+                                        <label class="control-label" for="sanswer">Security Answer:</label>
+                                        <div class="controls">
+                                            <h:inputText id="sanswer" class="span5" value="#{userController.user.securityAnswer}" required="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls clearfix">
+                                            <h:commandButton class="btn btn pull-left btn-large btn-success" value="Update Profile" action="#{userController.update()}"/>
+                                        </div>
+                                    </div>
+                                </h:form>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
+

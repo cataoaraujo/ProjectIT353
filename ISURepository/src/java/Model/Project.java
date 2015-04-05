@@ -3,10 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Model;
 
+import Database.Database;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -14,6 +22,7 @@ import java.util.Date;
  * @author it3530203
  */
 public class Project {
+
     private int id;
     private String name;
     private User user;
@@ -24,14 +33,49 @@ public class Project {
     private String semester;
     private Date dateCreated;
     private boolean highlighted;
-    
-    private ArrayList<Submissions> submissions;
-    private ArrayList<Committee> committeeMembers;
-    
-    private ArrayList<String> keywords;
-    
+
+    private ArrayList<Submissions> submissions = new ArrayList<>();
+    private ArrayList<Committee> committeeMembers = new ArrayList<>();
+
+    private ArrayList<String> keywords = new ArrayList<>();
+
     private int views;
     private int downloads;
+
+    public boolean add() {
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO Project VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?, false)",Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, name);
+            ps.setInt(2, user.getId());
+            ps.setString(3, courseNumber);
+            ps.setString(4, liveLink);
+            ps.setString(5, projectAbstract);
+            ps.setString(6, screencastLink);
+            ps.setString(7, semester);
+            ps.setTimestamp(8, Timestamp.from(Instant.now()));
+            if (ps.executeUpdate() == 1) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        id = rs.getInt(1);
+                    }
+                    for (Committee committee : committeeMembers) {
+                        committee.setProject(this);
+                        committee.add();
+                    }
+                }
+
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return false;
+    }
+
+    public void addCommittee(Committee committee) {
+        committeeMembers.add(committee);
+    }
 
     public int getId() {
         return id;
@@ -152,6 +196,5 @@ public class Project {
     public void setDownloads(int downloads) {
         this.downloads = downloads;
     }
-    
-    
+
 }

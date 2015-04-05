@@ -10,7 +10,7 @@ package Model;
  *
  * @author it3530203
  */
-class Document {
+public class Document {
     private int id;
     private String name;
     private String link;

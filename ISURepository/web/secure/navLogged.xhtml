@@ -4,14 +4,14 @@
       xmlns:f="http://java.sun.com/jsf/core" 
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-
+    
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
                     <i class="icon-reorder shaded"></i>
                 </a>
-                <a class="brand" href="index.xhtml">
+                <a class="brand" href="../index.xhtml">
                     ISURepository
                 </a>
                 <div class="nav-collapse collapse navbar-inverse-collapse">
@@ -24,11 +24,11 @@
                     <h:form>
                         <ul class="nav pull-right">
                             <li>
-                                <h:link outcome="secure/profile.xhtml" rendered="#{userController.logged}">Profile</h:link>
+                                <h:link outcome="profile.xhtml" rendered="#{userController.logged}">Profile</h:link>
                             </li>
                             <li>
-                                <h:link outcome="login.xhtml" rendered="#{!userController.logged}">Sign In</h:link>
-                                <h:commandLink action="#{userController.logoff()}" rendered="#{userController.logged}" value="Logoff"/>
+                                <h:link outcome="/login.xhtml" rendered="#{!userController.logged}">Sign In</h:link>
+                                <h:commandLink action="#{userController.logoffSecure()}" rendered="#{userController.logged}" value="Logoff"/>
                             </li>
                         </ul>
                     </h:form>
@@ -36,5 +36,5 @@
             </div>
         </div>
     </div>
-
+    
 </html>

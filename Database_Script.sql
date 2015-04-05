@@ -32,6 +32,7 @@ CREATE TABLE Committee
 (
 commitee_id int GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 project_id int NOT NULL,
+committeeName varchar(45) NOT NULL,
 committeeEmail varchar(45) NOT NULL,
 type varchar(45) NOT NULL,
 primary key(project_id, committeeEmail)

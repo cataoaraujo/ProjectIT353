@@ -134,9 +134,15 @@ public class UserController {
 
     }
 
-    public void logoff() {
+    public String logoff() {
         user = new User();
         logged = false;
+        return "index.xhtml";
+    }
+    public String logoffSecure() {
+        user = new User();
+        logged = false;
+        return "/index.xhtml";
     }
 
     public boolean isLogged() {

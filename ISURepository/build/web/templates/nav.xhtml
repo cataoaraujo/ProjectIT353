@@ -4,7 +4,7 @@
       xmlns:f="http://java.sun.com/jsf/core" 
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    
+
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
@@ -21,14 +21,20 @@
                             <i class="icon-search"></i>
                         </button>
                     </form>
-                    <ul class="nav pull-right">
-                        <li>
-                            <a href="login.xhtml">Sign In</a>
-                        </li>
-                    </ul>
+                    <h:form>
+                        <ul class="nav pull-right">
+                            <li>
+                                <h:link outcome="secure/profile.xhtml" rendered="#{userController.logged}">Profile</h:link>
+                            </li>
+                            <li>
+                                <h:link outcome="login.xhtml" rendered="#{!userController.logged}">Sign In</h:link>
+                                <h:commandLink action="#{userController.logoff()}" rendered="#{userController.logged}" value="Logoff"/>
+                            </li>
+                        </ul>
+                    </h:form>
                 </div>
             </div>
         </div>
     </div>
-    
+
 </html>

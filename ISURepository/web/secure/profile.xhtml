@@ -8,28 +8,11 @@
     <ui:composition template="/templates/content.xhtml">
 
         <ui:define name="nav">
-            <ui:include src="templates/navcancel.xhtml"/>
+            <ui:include src="/secure/navLogged.xhtml"/>
         </ui:define>
 
         <ui:define name="sidebar">
-            <div class="span3">
-                <div class="sidebar">
-                    <ul class="widget widget-menu unstyled">
-                        <li class="active">
-                            <a href="index.xhtml">
-                                <i class="menu-icon icon-star"></i>
-                                Something
-                            </a>
-                        </li>
-                        <li>
-                            <a href="newprojects.xhtml">
-                                <i class="menu-icon icon-time"></i>
-                                Create New Project
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+             <ui:include src="/secure/sidebarSecure.xhtml"/>
         </ui:define>
 
         <ui:define name="content">

@@ -13,7 +13,9 @@ Database
 * [x] Sign up Account (must wait for approval before signing in) Details: First Name, Last Name, UserID (check for existence), Password, Confirm Password, Email (must be ISU's), Security Question, Security Answer, Reason for an Account
 	* [x] Update User information
 	
-* [ ] add Thesis/Project (including live link to run a project) (details to include forthcoming) Details: Course #, live link, keywords, abstract, documentation in Word/PDF, screencast link/file, committee chair & members, semester completed (pre-filled: student name(s), date uploaded) 
+* [x] add Thesis/Project (including live link to run a project) (details to include forthcoming) Details: Course #, live link, keywords, abstract, documentation in Word/PDF, screencast link/file, committee chair & members, semester completed (pre-filled: student name(s), date uploaded) 
+
+* [ ] Setup Routing Chain (order in which approval is processed) <== Admin only
 
 ## Tim
 
@@ -25,9 +27,6 @@ Database
 
 ## Use Cases not in progress
 
-
-
-* [ ] Setup Routing Chain (order in which approval is processed) <== Admin only
 
 * [ ] Request for / Route Approval
 
