@@ -19,7 +19,13 @@ Database
 
 ## Tim
 
-* ?
+* [ ] Approve Account <== Admin only
+
+* [ ] Mark Thesis/Project for showcase <== Admin only
+
+* [ ] Print Flyer (for postings at committee members' offices) <== Admin only
+
+* [ ] Enable Dashboard (to show various reports (e.g., most viewed Theses/Projects, most downloaded, list of Theses/Projects for a specified date range, etc.)) <== Admin only
 
 ## Gabriel
 
@@ -48,14 +54,8 @@ Database
 
 * [ ] Unsubscribe from Mailing
 
-* [ ] Print Flyer (for postings at committee members' offices) <== Admin only
-
-* [ ] Enable Dashboard (to show various reports (e.g., most viewed Theses/Projects, most downloaded, list of Theses/Projects for a specified date range, etc.)) <== Admin only
-
 * [ ] Highlight/Showcase Thesis/Project 
-
-* [ ] Mark Thesis/Project for showcase <== Admin only
 
 * [ ] Retrieve lost password
 
-* [ ] Approve Account <== Admin only
+
