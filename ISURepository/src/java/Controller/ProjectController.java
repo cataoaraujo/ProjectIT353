@@ -47,7 +47,7 @@ public class ProjectController {
         project.setUser(userController.getUser());
         System.out.println(userController.getUser().getFirstName() + "*******************");
         if (project.add()) {
-            return "index.hmtl";
+            return "/index.hmtl";
         }
         return "error.xhtml";
     }

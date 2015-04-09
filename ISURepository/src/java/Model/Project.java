@@ -55,7 +55,7 @@ public class Project {
             ps.setString(6, screencastLink);
             ps.setString(7, semester);
             //ps.setTimestamp(8, Timestamp.from(Instant.now()));
-            ps.setString(8, new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()));
+            ps.setString(8, new SimpleDateFormat("yyyy-MM-dd-kk.mm.ss.SSS").format(new Date()));
             if (ps.executeUpdate() == 1) {
                 try (ResultSet rs = ps.getGeneratedKeys()) {
                     if (rs.next()) {
