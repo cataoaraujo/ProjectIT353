@@ -12,7 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.time.Instant;
+import java.text.SimpleDateFormat;
+//import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -53,7 +54,8 @@ public class Project {
             ps.setString(5, projectAbstract);
             ps.setString(6, screencastLink);
             ps.setString(7, semester);
-            ps.setTimestamp(8, Timestamp.from(Instant.now()));
+            //ps.setTimestamp(8, Timestamp.from(Instant.now()));
+            ps.setString(8, new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()));
             if (ps.executeUpdate() == 1) {
                 try (ResultSet rs = ps.getGeneratedKeys()) {
                     if (rs.next()) {
