@@ -54,6 +54,7 @@ CREATE TABLE Approval
 submission_id int NOT NULL,
 committee_id int NOT NULL,
 approved boolean,
+committeeComment varchar(256),
 primary key(submission_id, committee_id)
 );
 
