@@ -19,7 +19,7 @@ Database
 
 ## Tim
 
-* [ ] Approve Account <== Admin only
+* [x] Approve Account <== Admin only
 
 * [ ] Mark Thesis/Project for showcase <== Admin only
 
