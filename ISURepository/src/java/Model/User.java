@@ -102,7 +102,7 @@ public class User {
         User u = null;
         Connection conn = Database.connect2DB();
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM UserAccount WHERE userID = ? AND password = ? AND accountApproval = True");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM UserAccount WHERE userID = ? AND password = ?");// AND accountApproval = True");
             ps.setString(1, userID);
             ps.setString(2, password);
             ResultSet result = ps.executeQuery();

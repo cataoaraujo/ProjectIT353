@@ -148,4 +148,13 @@ public class UserController {
     public boolean isLogged() {
         return logged;
     }
+    
+    public boolean isAdmin()
+    {
+        if(!logged)
+            return false;
+        else if(!user.getType().equalsIgnoreCase("admin"))
+            return false;
+        return true;
+    }
 }

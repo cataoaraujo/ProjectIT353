@@ -24,6 +24,9 @@
                     <h:form>
                         <ul class="nav pull-right">
                             <li>
+                                <h:link outcome="/admin/adminDashboard.xhtml" rendered="#{userController.isAdmin()}">Admin</h:link>
+                            </li>
+                            <li>
                                 <h:link outcome="profile.xhtml" rendered="#{userController.logged}">Profile</h:link>
                             </li>
                             <li>

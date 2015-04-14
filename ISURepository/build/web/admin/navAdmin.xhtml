@@ -24,10 +24,10 @@
                     <h:form>
                         <ul class="nav pull-right">
                             <li>
-                                <h:link outcome="/admin/adminDashboard.xhtml" rendered="#{userController.isAdmin()}">Admin</h:link>
+                                <h:link outcome="adminDashboard.xhtml" rendered="#{userController.admin}">Admin</h:link>
                             </li>
                             <li>
-                                <h:link outcome="profile.xhtml" rendered="#{userController.logged}">Profile</h:link>
+                                <h:link outcome="/secure/profile.xhtml" rendered="#{userController.logged}">Profile</h:link>
                             </li>
                             <li>
                                 <h:link outcome="/login.xhtml" rendered="#{!userController.logged}">Sign In</h:link>
