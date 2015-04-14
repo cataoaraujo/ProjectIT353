@@ -3,22 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/src/java/Filter/LoginFilter.java</file>
-            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/src/java/Database/Database.java</file>
-            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/index.xhtml</file>
-            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/src/java/Controller/ProjectController.java</file>
+            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/admin/sidebarAdmin.xhtml</file>
+            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/src/java/validator/PasswordValidator.java</file>
             <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/src/java/Model/User.java</file>
-            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/secure/navLogged.xhtml</file>
-            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/templates/nav.xhtml</file>
-            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/templates/navcancel.xhtml</file>
-            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/secure/profile.xhtml</file>
+            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/index.xhtml</file>
+            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/src/java/Controller/AdminController.java</file>
+            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/templates/content.xhtml</file>
+            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/signup.xhtml</file>
+            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/admin/navAdmin.xhtml</file>
+            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/admin/adminDashboard.xhtml</file>
             <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/secure/sidebarSecure.xhtml</file>
-            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/templates/sidebar.xhtml</file>
-            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/resources/css/theme.css</file>
-            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/resources/images/icons/css/font-awesome.css</file>
-            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/resources/images/bg.png</file>
-            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/resources/images/img.jpg</file>
-            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/resources/images/user.png</file>
+            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/src/java/validator/UserIDValidator.java</file>
+            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/login.xhtml</file>
+            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/src/java/Controller/UserController.java</file>
+            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/web/templates/nav.xhtml</file>
+            <file>file:/Users/Tim/Documents/IT353/ProjectIT353/ISURepository/src/java/Controller/ProjectController.java</file>
         </group>
     </open-files>
 </project-private>

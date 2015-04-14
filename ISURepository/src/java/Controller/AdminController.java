@@ -26,7 +26,7 @@ import javax.mail.internet.MimeMessage;
 public class AdminController {
     
     private ArrayList<User> unapprovedUsers;
-    
+    private User selectedUser;
     
 
     /**
@@ -62,6 +62,23 @@ public class AdminController {
         }
         
         return unapprovedUsers;
+    }
+    
+    public void approve()
+    {
+        selectedUser.approveAccount();
+    }
+    
+    public void deny()
+    {
+        
+    }
+    
+    /**
+     * @param selectedUser the selectedUser to set
+     */
+    public void setSelectedUser(User selectedUser) {
+        this.selectedUser = selectedUser;
     }
     
     

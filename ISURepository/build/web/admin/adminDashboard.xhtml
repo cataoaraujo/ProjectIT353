@@ -22,35 +22,38 @@
                         <div class="module-head">
                             <h3>Approve Accounts</h3>
                         </div>
-                        <div class="module-body">
-                            <table class="table table-responsive table-striped">
-                                <thead>
+                        <table class="module-body table table-responsive table-striped">
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Reason for Account</th>
+                                    <th>Approval</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <h:form>
+                                <ui:repeat var="user" value="#{adminController.getUnapprovedUsers()}" varStatus="status">
                                     <tr>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Reason for Account</th>
-                                        <th>Approval</th>
+                                        <td>#{user.firstName}</td>
+                                        <td>#{user.lastName}</td>
+                                        <td>#{user.accountReason}</td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="...">
+                                                <h:commandLink action="#{adminController.approve()}" styleClass="btn btn-success"><i class="menu-icon icon-ok"></i>
+                                                    <f:setPropertyActionListener target="#{adminController.selectedUser}" value="#{user}"/>
+                                                </h:commandLink>
+                                                <h:commandLink action="#{adminController.deny()}" styleClass="btn btn-danger"><i class="menu-icon icon-remove"></i>
+                                                    <f:setPropertyActionListener target="#{adminController.selectedUser}" value="#{user}"/>
+                                                </h:commandLink>
+                                            </div>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>    
-                                    <ui:repeat var="o" value="#{adminController.getUnapprovedUsers()}" varStatus="status">
-                                        <tr>
-                                            <td>#{o.firstName}</td>
-                                            <td>#{o.lastName}</td>
-                                            <td>#{o.accountReason}</td>
-                                            <td>
-                                                <div class="btn-group" role="group" aria-label="...">
-                                                    <button type="button" class="btn btn-success"><i class="menu-icon icon-ok"></i></button>
-                                                    <button type="button" class="btn btn-danger"><i class="menu-icon icon-remove"></i></button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </ui:repeat>
-                                </tbody>
-                            </table>
-                        </div>
+                                </ui:repeat>
+                                </h:form>
+                            </tbody>
+                        </table>
                     </div>
-
                 </div>
             </div>
         </ui:define>
