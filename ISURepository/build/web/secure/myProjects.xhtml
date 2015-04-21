@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/templates/content.xhtml">
+
+        <ui:define name="nav">
+            <ui:include src="/secure/navLogged.xhtml"/>
+        </ui:define>
+
+        <ui:define name="sidebar">
+            <ui:include src="/secure/sidebarSecure.xhtml"/>
+        </ui:define>
+
+        <ui:define name="content">
+            <div class="span9">
+                <div class="content">
+                    <div class="module">
+                        <div class="module-head">
+                            <h3>My Projects:</h3>
+                        </div>
+                        <div class="module-body">
+                            <div class="stream-list">
+
+                                <!-- REPETED PART -->
+                                <ui:repeat var="p" value="#{userController.user.projects}" varStatus="status">
+                                    <div class="media stream">
+                                        <img class="media-avatar medium pull-left" src="../resources/images/user.png" />
+                                        <div class="media-body">
+                                            <div class="stream-headline">
+                                                <h5 class="stream-author">
+                                                    #{p.name}
+                                                    <small>#{p.user.firstName} #{p.user.lastName}</small>
+                                                </h5>
+                                                <div class="stream-text">
+                                                    <p>#{p.projectAbstract}</p>
+                                                </div>
+                                                <div class="stream-text">
+                                                    <ol class="inline">
+                                                        <ui:repeat var="k" value="#{p.keywords}" varStatus="status">
+                                                            <li><a href="#">##{k}</a></li>
+                                                        </ui:repeat>
+                                                    </ol>
+                                                </div>
+                                            </div>
+                                            <div class="stream-options">
+                                                <a href="projectDetails.xhtml?id=#{p.id}" class="btn btn-small">
+                                                    <i class="icon-cloud shaded"></i>
+                                                    View
+                                                </a>
+                                                <a href="updateProject.xhtml?id=#{p.id}" class="btn btn-small">
+                                                    <i class="icon-edit shaded"></i>
+                                                    Edit
+                                                </a>
+                                                <a href="#" class="btn btn-small">
+                                                    <i class="icon-refresh shaded"></i>
+                                                    Check Status
+                                                </a>
+                                            </div>
+                                            <div class="stream-options">
+                                                <h5>Submissions:</h5>
+                                                <a href="#" class="btn btn-small btn-success">
+                                                    <i class="icon-paper-clip shaded"></i>
+                                                    Submit Preliminary Proposal
+                                                </a>
+                                                <a href="#" class="btn btn-small btn-danger disabled">
+                                                    <i class="icon-paper-clip shaded"></i>
+                                                    Submit Final Proposal
+                                                </a>
+                                                <a href="#" class="btn btn-small btn-danger disabled">
+                                                    <i class="icon-paper-clip shaded"></i>
+                                                    Submit Presentation Scheduling
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+                                <!-- END REPETED PART -->
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
+

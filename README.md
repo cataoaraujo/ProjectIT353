@@ -15,6 +15,10 @@ Database
 	
 * [x] add Thesis/Project (including live link to run a project) (details to include forthcoming) Details: Course #, live link, keywords, abstract, documentation in Word/PDF, screencast link/file, committee chair & members, semester completed (pre-filled: student name(s), date uploaded) 
 
+* [x] Update Details (of a Thesis/Project)
+
+* [ ] Request for / Route Approval
+
 * [ ] Setup Routing Chain (order in which approval is processed) <== Admin only
 
 ## Tim
@@ -42,10 +46,6 @@ Database
 * [ ] Highlight/Showcase Thesis/Project 
 
 ## Use Cases not in progress
-
-* [ ] Request for / Route Approval
-
-* [ ] Update Details (of a Thesis/Project)
 
 * [ ] Show Similar Thesis/Project
 

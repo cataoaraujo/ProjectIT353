@@ -6,11 +6,17 @@
 package Controller;
 
 import Model.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -31,11 +37,34 @@ public class ProjectController {
     @ManagedProperty(value = "#{userController}")
     private UserController userController;
 
+    @ManagedProperty("#{param.id}")
+    private int id;
+
     public ProjectController() {
         project = new Project();
     }
 
-    
+    @PostConstruct
+    public void init() {
+        if (id != 0) {
+            project = Project.findById(id);
+            if (project == null) {
+                try {
+                    FacesContext context = FacesContext.getCurrentInstance();
+                    HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+                    response.sendRedirect("../index.xhtml");
+                } catch (IOException ex) {
+                    Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                ArrayList<String> ks = project.getKeywords();
+                keywords = "";
+                for (String k : ks) {
+                    keywords += k + " ";
+                }
+            }
+        }
+    }
 
     public String create() {
         Committee chair = new Committee(committeeChair, committeeChairEmail, Committee.CommitteeType.Chair);
@@ -53,7 +82,19 @@ public class ProjectController {
         project.setKeywords(new ArrayList<>(Arrays.asList(ks)));
         System.out.println(userController.getUser().getFirstName() + "*******************");
         if (project.add()) {
-            return "/index.hmtl";
+            return "../index.hmtl";
+        }
+        return "error.xhtml";
+    }
+
+    public String update() {
+        project.setId(id);
+        System.out.println("ID: "+id+" Project:"+project.getId());
+        String[] ks = keywords.split(" ");
+        project.setKeywords(new ArrayList<>(Arrays.asList(ks)));
+        if (project.update()) {
+            userController.getUser().findUserProjects();
+            return "projectDetails.xhtml?id=" + project.getId();
         }
         return "error.xhtml";
     }
@@ -146,5 +187,12 @@ public class ProjectController {
         this.keywords = keywords;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 }

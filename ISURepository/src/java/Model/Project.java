@@ -73,6 +73,39 @@ public class Project {
         return false;
     }
 
+    public boolean update() {
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("UPDATE Project SET name = ?, coursenumber = ?, livelink = ?, abstract = ?, screencastlink = ?, semester = ? WHERE id = ?");
+            ps.setString(1, name);
+            ps.setString(2, courseNumber);
+            ps.setString(3, liveLink);
+            ps.setString(4, projectAbstract);
+            ps.setString(5, screencastLink);
+            ps.setString(6, semester);
+            ps.setInt(7, id);
+            if (ps.executeUpdate() == 1) {
+                removeKeywords();
+                addKeyword();//Add All Keywords
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return false;
+    }
+
+    private void removeKeywords() {
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM ProjectKeywords WHERE project_id = ?");
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
+
     private int findKeywordID(String key) {
         Connection conn = Database.connect2DB();
         try {
@@ -110,14 +143,16 @@ public class Project {
         Connection conn = Database.connect2DB();
         try {
             for (String keyword : keywords) {
-                int kID = findKeywordID(keyword);
-                if (kID == -1) {
-                    kID = createKeyword(keyword);
+                if (!keyword.isEmpty()) {
+                    int kID = findKeywordID(keyword);
+                    if (kID == -1) {
+                        kID = createKeyword(keyword);
+                    }
+                    PreparedStatement ps = conn.prepareStatement("INSERT INTO ProjectKeywords VALUES(?, ?)");
+                    ps.setInt(1, kID);
+                    ps.setInt(2, id);
+                    ps.executeUpdate();
                 }
-                PreparedStatement ps = conn.prepareStatement("INSERT INTO ProjectKeywords VALUES(?, ?)");
-                ps.setInt(1, kID);
-                ps.setInt(2, id);
-                ps.executeUpdate();
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
@@ -187,7 +222,7 @@ public class Project {
         return projects;
     }
 
-    private void retrieveProjectKeywords() {
+    protected void retrieveProjectKeywords() {
         Connection conn = Database.connect2DB();
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT Keyword.keyword FROM ProjectKeywords, Keyword "
@@ -242,7 +277,7 @@ public class Project {
     public String getLiveLink() {
         if (liveLink != null) {
             liveLink = liveLink.replaceAll("http://", "");
-        }else{
+        } else {
             return "";
         }
         return "http://" + liveLink;

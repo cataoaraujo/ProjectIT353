@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Model;
 
 import Database.Database;
@@ -19,6 +18,7 @@ import java.util.ArrayList;
  * @author it3530203
  */
 public class User {
+
     private int id;
     private String firstName;
     private String lastName;
@@ -30,21 +30,21 @@ public class User {
     private String accountReason;
     private String type;
     private boolean accountApproval;
-    
-    private ArrayList<Project> projects = new ArrayList<>();
+
+    private ArrayList<Project> projects;
 
     public User() {
-        type="user";
+        type = "user";
+        projects = new ArrayList<>();
     }
 
-    
-    public boolean verifyUserID(){
+    public boolean verifyUserID() {
         Connection conn = Database.connect2DB();
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM UserAccount WHERE userID = ?");
             ps.setString(1, userID);
             ResultSet result = ps.executeQuery();
-            if(result.next()){
+            if (result.next()) {
                 return false;
             }
         } catch (SQLException ex) {
@@ -52,8 +52,8 @@ public class User {
         }
         return true;
     }
-    
-    public boolean add(){
+
+    public boolean add() {
         Connection conn = Database.connect2DB();
         try {
             PreparedStatement ps = conn.prepareStatement("INSERT INTO UserAccount VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?, 'user', false)", Statement.RETURN_GENERATED_KEYS);
@@ -67,7 +67,7 @@ public class User {
             ps.setString(8, accountReason);
             //ps.setString(9, type);
             //ps.setBoolean(10, accountApproval);
-            if(ps.executeUpdate() == 1){
+            if (ps.executeUpdate() == 1) {
                 try (ResultSet rs = ps.getGeneratedKeys()) {
                     if (rs.next()) {
                         id = rs.getInt(1);
@@ -80,8 +80,8 @@ public class User {
         }
         return false;
     }
-    
-    public boolean update(){
+
+    public boolean update() {
         Connection conn = Database.connect2DB();
         try {
             PreparedStatement ps = conn.prepareStatement("UPDATE UserAccount SET firstName = ?, lastName = ?, password = ?, email = ?, securityQuestion = ?, securityAnswer = ?, accountReason = ?, accountApproval = ? WHERE userID = ?");
@@ -94,7 +94,7 @@ public class User {
             ps.setString(7, accountReason);
             ps.setBoolean(8, accountApproval);
             ps.setString(9, userID);
-            if(ps.executeUpdate() == 1){
+            if (ps.executeUpdate() == 1) {
                 return true;
             }
         } catch (SQLException ex) {
@@ -102,8 +102,8 @@ public class User {
         }
         return false;
     }
-    
-    public static User login(String userID, String password){
+
+    public static User login(String userID, String password) {
         User u = null;
         Connection conn = Database.connect2DB();
         try {
@@ -111,54 +111,83 @@ public class User {
             ps.setString(1, userID);
             ps.setString(2, password);
             ResultSet result = ps.executeQuery();
-            if(result.next()){
-               u = new User();
-               u.setId(result.getInt("id"));
-               u.setFirstName(result.getString("firstName"));
-               u.setLastName(result.getString("lastName"));
-               u.setUserID(result.getString("userID"));
-               u.setPassword(result.getString("password"));
-               u.setEmail(result.getString("email"));
-               u.setSecurityQuestion(result.getString("securityQuestion"));
-               u.setSecurityAnswer(result.getString("securityAnswer"));
-               u.setAccountReason(result.getString("accountReason"));
-               u.setType(result.getString("type"));
-               u.setAccountApproval(result.getBoolean("accountApproval"));
+            if (result.next()) {
+                u = new User();
+                u.setId(result.getInt("id"));
+                u.setFirstName(result.getString("firstName"));
+                u.setLastName(result.getString("lastName"));
+                u.setUserID(result.getString("userID"));
+                u.setPassword(result.getString("password"));
+                u.setEmail(result.getString("email"));
+                u.setSecurityQuestion(result.getString("securityQuestion"));
+                u.setSecurityAnswer(result.getString("securityAnswer"));
+                u.setAccountReason(result.getString("accountReason"));
+                u.setType(result.getString("type"));
+                u.setAccountApproval(result.getBoolean("accountApproval"));
+                u.findUserProjects();
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
         return u;
     }
-    
-    public static User findByID(int id){
+
+    public static User findByID(int id) {
         User u = null;
         Connection conn = Database.connect2DB();
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM UserAccount WHERE id = ?");
             ps.setInt(1, id);
             ResultSet result = ps.executeQuery();
-            if(result.next()){
-               u = new User();
-               u.setId(result.getInt("id"));
-               u.setFirstName(result.getString("firstName"));
-               u.setLastName(result.getString("lastName"));
-               u.setUserID(result.getString("userID"));
-               u.setPassword(result.getString("password"));
-               u.setEmail(result.getString("email"));
-               u.setSecurityQuestion(result.getString("securityQuestion"));
-               u.setSecurityAnswer(result.getString("securityAnswer"));
-               u.setAccountReason(result.getString("accountReason"));
-               u.setType(result.getString("type"));
-               u.setAccountApproval(result.getBoolean("accountApproval"));
+            if (result.next()) {
+                u = new User();
+                u.setId(result.getInt("id"));
+                u.setFirstName(result.getString("firstName"));
+                u.setLastName(result.getString("lastName"));
+                u.setUserID(result.getString("userID"));
+                u.setPassword(result.getString("password"));
+                u.setEmail(result.getString("email"));
+                u.setSecurityQuestion(result.getString("securityQuestion"));
+                u.setSecurityAnswer(result.getString("securityAnswer"));
+                u.setAccountReason(result.getString("accountReason"));
+                u.setType(result.getString("type"));
+                u.setAccountApproval(result.getBoolean("accountApproval"));
+                u.findUserProjects();
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
         return u;
     }
-    
-    public boolean approveAccount(){
+
+    public void findUserProjects() {
+        this.projects = new ArrayList<>();
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Project WHERE student_id = ?");
+            ps.setInt(1, id);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                Project p = new Project();
+                p.setId(result.getInt("id"));
+                p.setName(result.getString("name"));
+                p.setUser(this);
+                p.setCourseNumber(result.getString("coursenumber"));
+                p.setLiveLink(result.getString("livelink"));
+                p.setProjectAbstract(result.getString("abstract"));
+                p.setScreencastLink(result.getString("screencastlink"));
+                p.setSemester(result.getString("semester"));
+                p.setDateCreated(result.getDate("datecreated"));
+                p.setHighlighted(result.getBoolean("highlighted"));
+                p.retrieveProjectKeywords();
+                this.projects.add(p);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
+
+    public boolean approveAccount() {
         accountApproval = true;
         return update();
     }
@@ -250,6 +279,14 @@ public class User {
     public void setAccountApproval(boolean accountApproval) {
         this.accountApproval = accountApproval;
     }
+
+    public ArrayList<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(ArrayList<Project> projects) {
+        this.projects = projects;
+    }
     
-   
+
 }
