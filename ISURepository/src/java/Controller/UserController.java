@@ -153,8 +153,8 @@ public class UserController {
     public boolean isAdmin() {
         if (!logged) {
             return false;
-        } else if (user != null && user.getType().equalsIgnoreCase("admin")) {
-            return true;
+        } else if (!user.getType().equalsIgnoreCase("admin")) {
+            return false;
         }
         return true;
     }
