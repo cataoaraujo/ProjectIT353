@@ -139,6 +139,7 @@ public class UserController {
         logged = false;
         return "index.xhtml";
     }
+
     public String logoffSecure() {
         user = new User();
         logged = false;
@@ -148,13 +149,13 @@ public class UserController {
     public boolean isLogged() {
         return logged;
     }
-    
-    public boolean isAdmin()
-    {
-        if(!logged)
+
+    public boolean isAdmin() {
+        if (!logged) {
             return false;
-        else if(!user.getType().equalsIgnoreCase("admin"))
+        } else if (user != null && !user.getType().equalsIgnoreCase("admin")) {
             return false;
+        }
         return true;
     }
 }
