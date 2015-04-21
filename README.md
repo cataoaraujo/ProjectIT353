@@ -29,18 +29,21 @@ Database
 
 ## Gabriel
 
-* ?
-
-## Use Cases not in progress
-
-
-* [ ] Request for / Route Approval
-
 * [ ] Check Approval Status
 
 * [ ] Search for Thesis/Project
 
 * [ ] View Details (of a Thesis/Project)
+
+* [ ] Subscribe to Thesis/Project mailing (based on keywords, etc.)
+
+* [ ] Unsubscribe from Mailing
+
+* [ ] Highlight/Showcase Thesis/Project 
+
+## Use Cases not in progress
+
+* [ ] Request for / Route Approval
 
 * [ ] Update Details (of a Thesis/Project)
 
@@ -49,12 +52,6 @@ Database
 * [ ] Download Thesis/Project
 
 * [ ] Export Thesis/Project (to XML/JSON format)
-
-* [ ] Subscribe to Thesis/Project mailing (based on keywords, etc.)
-
-* [ ] Unsubscribe from Mailing
-
-* [ ] Highlight/Showcase Thesis/Project 
 
 * [ ] Retrieve lost password
 
