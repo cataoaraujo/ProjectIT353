@@ -131,6 +131,33 @@ public class User {
         return u;
     }
     
+    public static User findByID(int id){
+        User u = null;
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM UserAccount WHERE id = ?");
+            ps.setInt(1, id);
+            ResultSet result = ps.executeQuery();
+            if(result.next()){
+               u = new User();
+               u.setId(result.getInt("id"));
+               u.setFirstName(result.getString("firstName"));
+               u.setLastName(result.getString("lastName"));
+               u.setUserID(result.getString("userID"));
+               u.setPassword(result.getString("password"));
+               u.setEmail(result.getString("email"));
+               u.setSecurityQuestion(result.getString("securityQuestion"));
+               u.setSecurityAnswer(result.getString("securityAnswer"));
+               u.setAccountReason(result.getString("accountReason"));
+               u.setType(result.getString("type"));
+               u.setAccountApproval(result.getBoolean("accountApproval"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return u;
+    }
+    
     public boolean approveAccount(){
         accountApproval = true;
         return update();

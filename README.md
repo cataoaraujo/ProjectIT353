@@ -31,9 +31,9 @@ Database
 
 * [ ] Check Approval Status
 
-* [ ] Search for Thesis/Project
+* [x] Search for Thesis/Project
 
-* [ ] View Details (of a Thesis/Project)
+* [x] View Details (of a Thesis/Project)
 
 * [ ] Subscribe to Thesis/Project mailing (based on keywords, etc.)
 

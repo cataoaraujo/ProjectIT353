@@ -11,11 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 //import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -46,7 +44,7 @@ public class Project {
     public boolean add() {
         Connection conn = Database.connect2DB();
         try {
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO Project VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?, false)",Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO Project VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?, false)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, name);
             ps.setInt(2, user.getId());
             ps.setString(3, courseNumber);
@@ -65,14 +63,144 @@ public class Project {
                         committee.setProject(this);
                         committee.add();
                     }
+                    addKeyword();//Add All Keywords
                 }
-
                 return true;
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
         return false;
+    }
+
+    private int findKeywordID(String key) {
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Keyword WHERE keyword = ?");
+            ps.setString(1, key);
+            ResultSet result = ps.executeQuery();
+            if (result.next()) {
+                return result.getInt("id");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return -1;
+    }
+
+    private int createKeyword(String key) {
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO Keyword VALUES(default, ?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, key);
+            if (ps.executeUpdate() == 1) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        return rs.getInt(1);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return -1;
+    }
+
+    private void addKeyword() {
+        Connection conn = Database.connect2DB();
+        try {
+            for (String keyword : keywords) {
+                int kID = findKeywordID(keyword);
+                if (kID == -1) {
+                    kID = createKeyword(keyword);
+                }
+                PreparedStatement ps = conn.prepareStatement("INSERT INTO ProjectKeywords VALUES(?, ?)");
+                ps.setInt(1, kID);
+                ps.setInt(2, id);
+                ps.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
+
+    public static Project findById(int id) {
+        Project p = null;
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Project WHERE id = ?");
+            ps.setInt(1, id);
+            ResultSet result = ps.executeQuery();
+            if (result.next()) {
+                p = new Project();
+                p.setId(result.getInt("id"));
+                p.setName(result.getString("name"));
+                p.setUser(User.findByID(result.getInt("student_id")));
+                p.setCourseNumber(result.getString("coursenumber"));
+                p.setLiveLink(result.getString("livelink"));
+                p.setProjectAbstract(result.getString("abstract"));
+                p.setScreencastLink(result.getString("screencastlink"));
+                p.setSemester(result.getString("semester"));
+                p.setDateCreated(result.getDate("datecreated"));
+                p.setHighlighted(result.getBoolean("highlighted"));
+                p.retrieveProjectKeywords();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return p;
+    }
+
+    public static ArrayList<Project> findByKeyword(String keyword) {
+        ArrayList<Project> projects = new ArrayList<>();
+        if (keyword != null) {
+            keyword = keyword.toUpperCase();
+
+            Connection conn = Database.connect2DB();
+            try {
+                PreparedStatement ps = conn.prepareStatement(""
+                        + "(SELECT PROJECT.ID FROM PROJECT, ProjectKeywords, Keyword "
+                        + "WHERE PROJECT.ID = ProjectKeywords.project_id "
+                        + "AND Keyword.id = ProjectKeywords.keyword_id "
+                        + "AND UPPER(Keyword.keyword) LIKE ? )"
+                        + "UNION "
+                        + "(SELECT PROJECT.ID "
+                        + "FROM PROJECT "
+                        + "WHERE UPPER(Project.name) LIKE ? "
+                        + "OR UPPER(Project.abstract) LIKE ? "
+                        + "OR UPPER(Project.semester) LIKE ? "
+                        + "OR UPPER(Project.courseNumber) LIKE ? )");
+                ps.setString(1, "%" + keyword + "%");
+                ps.setString(2, "%" + keyword + "%");
+                ps.setString(3, "%" + keyword + "%");
+                ps.setString(4, "%" + keyword + "%");
+                ps.setString(5, "%" + keyword + "%");
+                ResultSet result = ps.executeQuery();
+                while (result.next()) {
+                    Project p = Project.findById(result.getInt("ID"));
+                    projects.add(p);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
+        return projects;
+    }
+
+    private void retrieveProjectKeywords() {
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT Keyword.keyword FROM ProjectKeywords, Keyword "
+                    + "WHERE Keyword.id = ProjectKeywords.keyword_id "
+                    + "AND ProjectKeywords.project_id = ?");
+            ps.setInt(1, id);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                this.keywords.add(result.getString("keyword"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
     }
 
     public void addCommittee(Committee committee) {
@@ -112,7 +240,12 @@ public class Project {
     }
 
     public String getLiveLink() {
-        return liveLink;
+        if (liveLink != null) {
+            liveLink = liveLink.replaceAll("http://", "");
+        }else{
+            return "";
+        }
+        return "http://" + liveLink;
     }
 
     public void setLiveLink(String liveLink) {

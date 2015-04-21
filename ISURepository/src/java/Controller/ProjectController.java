@@ -7,6 +7,7 @@ package Controller;
 
 import Model.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -25,6 +26,7 @@ public class ProjectController {
     private String committeeMember1, committeeMember1Email;
     private String committeeMember2, committeeMember2Email;
     private String committeeAdvisor, committeeAdvisorEmail;
+    private String keywords;
 
     @ManagedProperty(value = "#{userController}")
     private UserController userController;
@@ -32,6 +34,8 @@ public class ProjectController {
     public ProjectController() {
         project = new Project();
     }
+
+    
 
     public String create() {
         Committee chair = new Committee(committeeChair, committeeChairEmail, Committee.CommitteeType.Chair);
@@ -45,6 +49,8 @@ public class ProjectController {
         project.addCommittee(member2);
         project.addCommittee(advisor);
         project.setUser(userController.getUser());
+        String[] ks = keywords.split(" ");
+        project.setKeywords(new ArrayList<>(Arrays.asList(ks)));
         System.out.println(userController.getUser().getFirstName() + "*******************");
         if (project.add()) {
             return "/index.hmtl";
@@ -131,7 +137,14 @@ public class ProjectController {
     public void setUserController(UserController userController) {
         this.userController = userController;
     }
-    
-    
+
+    public String getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
+    }
+
 
 }

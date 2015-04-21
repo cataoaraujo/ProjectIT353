@@ -21,7 +21,7 @@
                 <div class="content">
                     <div class="module">
                         <div class="module-head">
-                            <h3>Title of the project</h3>
+                            <h3>#{projectDetailsController.project.name}</h3>
                         </div>
                         <div class="module-body">
                             <div class="stream-list">
@@ -33,20 +33,17 @@
                                                 Abstract:
                                             </h5>
                                             <div class="stream-text">
-                                                <p>Abstract Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </p>
-                                                <p>Abstract Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </p>
-                                                <p>Abstract Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </p>
-                                                <p>Abstract Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </p>
+                                                <p>#{projectDetailsController.project.projectAbstract}</p>
                                             </div>
                                             <div class="row-fluid">
                                                 <div class="span4 stream-author">
                                                     <h5>Autor: </h5>
-                                                    <span class="row-fluid">First Name Last Name</span> 
+                                                    <span class="row-fluid">#{projectDetailsController.project.user.firstName} #{projectDetailsController.project.user.lastName}</span> 
                                                 </div>
                                                 <div class="span4 stream-author">
                                                     <h5>Course / Semester: </h5> 
                                                     <span class="row-fluid">Professor First Last Name</span> 
-                                                    <span class="row-fluid">Spring 2015</span> 
+                                                    <span class="row-fluid">#{projectDetailsController.project.courseNumber} / #{projectDetailsController.project.semester}</span> 
                                                 </div>
                                                 <div class="span4 stream-author">
                                                     <h5>Committee Chair </h5> 
@@ -57,35 +54,44 @@
                                             <div class="stream-text">   
                                                 <h5>Keywords: </h5>
                                                 <ol class="inline">
-                                                    <li><a href="#">#keyword</a></li>
-                                                    <li><a href="#">#keyword</a></li>
-                                                    <li><a href="#">#keyword</a></li>
-                                                    <li><a href="#">#keyword</a></li>
-                                                    <li><a href="#">#keyword</a></li>
+                                                    <ui:repeat var="k" value="#{projectDetailsController.project.keywords}" varStatus="status">
+                                                        <li><a href="#">##{k}</a></li>
+                                                    </ui:repeat>
                                                 </ol>
                                             </div>
                                         </div>
                                         <div class="stream-options">
                                             <h5>Tools and Files:</h5> 
-                                            <a href="#" class="btn btn-small">
+                                            <a href="#{projectDetailsController.project.liveLink}" class="btn btn-small">
                                                 <i class="icon-cloud shaded"></i>
                                                 Live version
                                             </a>
-                                            <a href="#" class="btn btn-small">
-                                                <i class="icon-paper-clip shaded"></i>
-                                                Documentation
-                                            </a>
-                                            <a href="#" class="btn btn-small">
+                                            <a href="#{projectDetailsController.project.screencastLink}" class="btn btn-small">
                                                 <i class="icon-external-link shaded"></i>
                                                 ScreenCast
                                             </a>
-                                            <a href="#" class="btn btn-small">
+                                            <a href="#" class="btn btn-small disabled">
                                                 <i class="icon-reply shaded"></i>
                                                 Export JSON
                                             </a>
-                                            <a href="#" class="btn btn-small">
+                                            <a href="#" class="btn btn-small disabled">
                                                 <i class="icon-reply shaded"></i>
                                                 Export XML
+                                            </a>
+                                        </div>
+                                        <div class="stream-options">
+                                            <h5>Documents:</h5> 
+                                            <a href="#" class="btn btn-small">
+                                                <i class="icon-paper-clip shaded"></i>
+                                                Preliminary Proposal
+                                            </a>
+                                            <a href="#" class="btn btn-small">
+                                                <i class="icon-paper-clip shaded"></i>
+                                                Final Proposal
+                                            </a>
+                                            <a href="#" class="btn btn-small">
+                                                <i class="icon-paper-clip shaded"></i>
+                                                Presentation Scheduling
                                             </a>
                                         </div>
                                     </div>
