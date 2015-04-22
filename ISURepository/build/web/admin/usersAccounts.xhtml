@@ -22,37 +22,58 @@
                         <div class="module-head">
                             <h3>Approve Accounts</h3>
                         </div>
-                        <table class="module-body table table-responsive table-striped">
-                            <thead>
-                                <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Reason for Account</th>
-                                    <th>Approval</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <h:form>
-                                <ui:repeat var="user" value="#{adminController.getUnapprovedUsers()}" varStatus="status">
-                                    <tr>
-                                        <td>#{user.firstName}</td>
-                                        <td>#{user.lastName}</td>
-                                        <td>#{user.accountReason}</td>
-                                        <td>
-                                            <div class="btn-group" role="group" aria-label="...">
-                                                <h:commandLink action="#{adminController.approve()}" styleClass="btn btn-success"><i class="menu-icon icon-ok"></i>
-                                                    <f:setPropertyActionListener target="#{adminController.selectedUser}" value="#{user}"/>
-                                                </h:commandLink>
-                                                <h:commandLink action="#{adminController.deny()}" styleClass="btn btn-danger"><i class="menu-icon icon-remove"></i>
-                                                    <f:setPropertyActionListener target="#{adminController.selectedUser}" value="#{user}"/>
-                                                </h:commandLink>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </ui:repeat>
-                                </h:form>
-                            </tbody>
-                        </table>
+                        <div class="module-body table">    
+                            <h:dataTable value="#{adminController.unapprovedUsers}" var="user"
+                               styleClass="datatable-1 table table-bordered table-striped display"
+                               cellpadding="0" cellspacing="0" border="0"
+                               width="100%">
+                               <h:column>    				
+                                  <f:facet name="header">First Name</f:facet>    				
+                                  #{user.firstName}
+                               </h:column>
+                               <h:column>
+                                  <f:facet name="header">Last Name</f:facet>
+                                  #{user.lastName}
+                               </h:column>
+                               <h:column>
+                                  <f:facet name="header">Reason For Account</f:facet>
+                                  #{user.accountReason}
+                               </h:column>
+                               <h:column>
+                                  <f:facet name="header">Approval</f:facet>
+                                  <h:form>
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <h:commandLink action="#{user.approveAccount()}" styleClass="btn btn-success"><i class="menu-icon icon-ok"></i></h:commandLink>
+                                        <h:commandLink action="#{adminController.deny()}" styleClass="btn btn-danger"><i class="menu-icon icon-remove"></i></h:commandLink>
+                                    </div>
+                                  </h:form>
+                               </h:column>
+                            </h:dataTable>
+                        </div>
+                    </div>
+                    <div class="module">
+                        <div class="module-head">
+                            <h3>Accounts</h3>
+                        </div>
+                        <div class="module-body table">    
+                            <h:dataTable value="#{adminController.approvedUsers}" var="user"
+                               styleClass="datatable-1 table table-bordered table-striped display"
+                               cellpadding="0" cellspacing="0" border="0"
+                               width="100%">
+                               <h:column>    				
+                                  <f:facet name="header">First Name</f:facet>    				
+                                  #{user.firstName}
+                               </h:column>
+                               <h:column>
+                                  <f:facet name="header">Last Name</f:facet>
+                                  #{user.lastName}
+                               </h:column>
+                               <h:column>
+                                  <f:facet name="header">Username</f:facet>
+                                  #{user.userID}
+                               </h:column>
+                            </h:dataTable>
+                        </div>
                     </div>
                 </div>
             </div>

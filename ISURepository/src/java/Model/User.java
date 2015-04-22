@@ -288,5 +288,12 @@ public class User {
         this.projects = projects;
     }
     
+    public boolean equals(User u)
+    {
+        if(this.id == u.id)
+            return true;
+        else
+            return false;
+    }
 
 }
