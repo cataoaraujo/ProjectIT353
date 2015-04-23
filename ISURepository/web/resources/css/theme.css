@@ -641,13 +641,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 .accordion-heading {
     background: #fafafa;
-    background: -moz-linear-gradient(top, #fff 0, #fff 50%, #fafafa 51%, #fafafa 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(50%, #fff), color-stop(51%, #fafafa), color-stop(100%, #fafafa));
-    background: -webkit-linear-gradient(top, #fff 0, #fff 50%, #fafafa 51%, #fafafa 100%);
-    background: -o-linear-gradient(top, #fff 0, #fff 50%, #fafafa 51%, #fafafa 100%);
-    background: -ms-linear-gradient(top, #fff 0, #fff 50%, #fafafa 51%, #fafafa 100%);
-    background: linear-gradient(to bottom, #fff 0, #fff 50%, #fafafa 51%, #fafafa 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@topColor', endColorstr='@bottomColor', GradientType=0)
 }
 .accordion-heading .accordion-toggle {
     color: #555;
@@ -741,7 +734,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
-    background-color: #428bca;
+    background-color: #29b7d3;
 }
 .progress.tight {
     height: 10px
@@ -1308,13 +1301,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 .dataTables_wrapper table tr:hover th {
     background: #f1f1f1;
-    background: -moz-linear-gradient(top, #fafafa 0, #fafafa 50%, #f1f1f1 51%, #f1f1f1 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafafa), color-stop(50%, #fafafa), color-stop(51%, #f1f1f1), color-stop(100%, #f1f1f1));
-    background: -webkit-linear-gradient(top, #fafafa 0, #fafafa 50%, #f1f1f1 51%, #f1f1f1 100%);
-    background: -o-linear-gradient(top, #fafafa 0, #fafafa 50%, #f1f1f1 51%, #f1f1f1 100%);
-    background: -ms-linear-gradient(top, #fafafa 0, #fafafa 50%, #f1f1f1 51%, #f1f1f1 100%);
-    background: linear-gradient(to bottom, #fafafa 0, #fafafa 50%, #f1f1f1 51%, #f1f1f1 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@topColor', endColorstr='@bottomColor', GradientType=0)
 }
 .dataTables_wrapper table tr:hover th.sorting_asc, .dataTables_wrapper table tr:hover th.sorting_desc {
     background: #f0f0f0
@@ -1394,13 +1380,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 .datatable-pagination>a:hover {
     background-color: #efefef;
-    background-image: -moz-linear-gradient(top, #f5f5f5, #e6e6e6);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f5f5f5), to(#e6e6e6));
-    background-image: -webkit-linear-gradient(top, #f5f5f5, #e6e6e6);
-    background-image: -o-linear-gradient(top, #f5f5f5, #e6e6e6);
-    background-image: linear-gradient(to bottom, #f5f5f5, #e6e6e6);
-    background-repeat: repeat-x;
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5f5f5', endColorstr='#ffe6e6e6', GradientType=0)
 }
 .datatable-pagination>a.paginate_disabled_previous, .datatable-pagination>a.paginate_disabled_next {
 
