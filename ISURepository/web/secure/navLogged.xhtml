@@ -15,12 +15,10 @@
                     ISURepository
                 </a>
                 <div class="nav-collapse collapse navbar-inverse-collapse">
-                    <form class="navbar-search pull-left input-append" action="#">
-                        <input type="text" class="span3" />
-                        <button class="btn" type="button">
-                            <i class="icon-search"></i>
-                        </button>
-                    </form>
+                    <h:form class="navbar-search pull-left input-append">
+                        <h:inputText id="searchQuery" class="span3" value="#{searchController.query}"/>
+                        <h:commandLink class="btn" action="/search.xhtml?faces-redirect=true"><i class="icon-search"></i></h:commandLink>
+                    </h:form>
                     <h:form>
                         <ul class="nav pull-right">
                             <li>
