@@ -1,16 +1,18 @@
-<!DOCTYPE html>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-
     <ui:composition template="/templates/content.xhtml">
 
         <ui:define name="nav">
-            <ui:include src="/secure/navLogged.xhtml"/>
+            <ui:include src="/admin/navAdmin.xhtml"/>
         </ui:define>
 
         <ui:define name="sidebar">
-            <ui:include src="/secure/sidebarSecure.xhtml"/>
+            <ui:include src="/admin/sidebarAdmin.xhtml"/>
         </ui:define>
 
         <ui:define name="content">
@@ -95,91 +97,6 @@
                                             </a>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <br/>
-                        <br/>
-                        <div class="module-head">
-                            <h3>Related Projects</h3>
-                        </div>
-                        <div class="module-body row-fluid">
-                            <div class="span4">
-                                <h5 class="stream-author">
-                                    Project Title
-                                </h5>
-                                <div class="stream-headline">
-                                    <div class="stream-text">   
-                                        <ol class="inline">
-                                            <li><a href="#">#Similar_keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                        </ol>
-                                    </div>
-                                </div>
-                                <div class="stream-options">
-                                    <a href="#" class="btn btn-small">
-                                        <i class="icon-cloud shaded"></i>
-                                        Live version
-                                    </a>
-                                    <a href="#" class="btn btn-small">
-                                        <i class="icon-plus shaded"></i>
-                                        More details
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="span4">
-                                <h5 class="stream-author">
-                                    Project Title
-                                </h5>
-                                <div class="stream-headline">
-                                    <div class="stream-text">   
-                                        <ol class="inline">
-                                            <li><a href="#">#Similar_keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                        </ol>
-                                    </div>
-                                </div>
-                                <div class="stream-options">
-                                    <a href="#" class="btn btn-small">
-                                        <i class="icon-cloud shaded"></i>
-                                        Live version
-                                    </a>
-                                    <a href="#" class="btn btn-small">
-                                        <i class="icon-plus shaded"></i>
-                                        More details
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="span4">
-                                <h5 class="stream-author">
-                                    Project Title
-                                </h5>
-                                <div class="stream-headline">
-                                    <div class="stream-text">   
-                                        <ol class="inline">
-                                            <li><a href="#">#Similar_keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                        </ol>
-                                    </div>
-                                </div>
-                                <div class="stream-options">
-                                    <a href="#" class="btn btn-small">
-                                        <i class="icon-cloud shaded"></i>
-                                        Live version
-                                    </a>
-                                    <a href="#" class="btn btn-small">
-                                        <i class="icon-plus shaded"></i>
-                                        More details
-                                    </a>
                                 </div>
                             </div>
                         </div>
