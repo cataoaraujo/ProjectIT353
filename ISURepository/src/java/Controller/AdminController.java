@@ -31,6 +31,7 @@ public class AdminController {
     private ArrayList<Project> allProjects; 
     private ArrayList<Project> highlightedProjects; 
     private User selectedUser;
+    private int userAmount;
     
     public AdminController()
     {
@@ -75,7 +76,7 @@ public class AdminController {
      * @return the approvedUsers
      */
     public ArrayList<User> getApprovedUsers() {
-        approvedUsers = new ArrayList<User>();
+        approvedUsers = new ArrayList<User>(getUserAmount());
         User u = null;
         Connection conn = Database.connect2DB();
         try {
@@ -128,6 +129,7 @@ public class AdminController {
     public ArrayList<Project> getAllProjects() {
         approvedUsers = getApprovedUsers();
         allProjects = new ArrayList<Project>();
+        int studentID;
         Project p = null;
         User u = null;
         Connection conn = Database.connect2DB();
@@ -140,8 +142,8 @@ public class AdminController {
                u = new User();
                p.setId(result.getInt("id"));
                p.setName(result.getString("name"));
-               int studentID = result.getInt("student_id");
-               u = approvedUsers.get(approvedUsers.indexOf(studentID));
+               studentID = result.getInt("student_id");
+               u = findUser(studentID);
                p.setUser(u);
                p.setCourseNumber(result.getString("courseNumber"));
                p.setLiveLink(result.getString("liveLink"));
@@ -150,7 +152,6 @@ public class AdminController {
                p.setSemester(result.getString("semester"));
                //p.setDateCreated(result.getString("dateCreated"));
                p.setHighlighted(result.getBoolean("highlighted"));
-               //u.setAccountApproval(result.getBoolean("accountApproval"));
                allProjects.add(p);
             } 
 
@@ -166,6 +167,36 @@ public class AdminController {
      */
     public ArrayList<Project> getHighlightedProjects() {
         return highlightedProjects;
+    }
+
+    /**
+     * @return the userAmount
+     */
+    public int getUserAmount() {
+        Connection conn = Database.connect2DB();
+        
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT MAX(id) FROM useraccount");
+            ResultSet result = ps.executeQuery();
+            if(result.next())
+                userAmount = result.getInt(1);
+            
+            result.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        return userAmount;
+    }
+    
+    public User findUser(int id)
+    {
+        for(int i = 0; i < approvedUsers.size(); i++)
+        {
+            if(approvedUsers.get(i).getId() == id)
+                return approvedUsers.get(i);
+        }
+        return null;
     }
     
     
