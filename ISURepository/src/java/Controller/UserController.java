@@ -47,6 +47,15 @@ public class UserController {
     public void setMsg(String msg) {
         this.msg = msg;
     }
+    
+    public boolean haveMsg(){
+        if(!msg.equals("")){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
     public void cleanError(ComponentSystemEvent event) {
         if (!FacesContext.getCurrentInstance().isPostback()) {

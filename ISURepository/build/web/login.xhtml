@@ -23,6 +23,11 @@
                         <h3>Sign In</h3>
                     </div>
                     <div class="module-body">
+                        <h:panelGroup  class="control-group alert-error" rendered="#{userController.haveMsg()}">
+                            <div class="controls clearfix">
+                                <label>#{userController.msg}</label>
+                            </div>
+                        </h:panelGroup >
                         <div class="control-group">
                             <label class="control-label" for="inputUserID">User ID:</label>
                             <div class="controls row-fluid">
@@ -51,13 +56,6 @@
                             <div class="controls clearfix">
                                 <b>Create your account</b>
                                 <a href="signup.xhtml" class="btn pull-right btn-large btn-info">Sign Up</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="module-foot">
-                        <div class="control-group">
-                            <div class="controls clearfix">
-                                <label>#{userController.msg}</label>
                             </div>
                         </div>
                     </div>
