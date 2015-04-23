@@ -12,7 +12,7 @@
         </ui:define>
 
         <ui:define name="sidebar">
-             <ui:include src="/admin/sidebarAdmin.xhtml"/>
+            <ui:include src="/admin/sidebarAdmin.xhtml"/>
         </ui:define>
 
         <ui:define name="content">
@@ -24,30 +24,30 @@
                         </div>
                         <div class="module-body table">    
                             <h:dataTable value="#{adminController.unapprovedUsers}" var="user"
-                               styleClass="datatable-1 table table-bordered table-striped display"
-                               cellpadding="0" cellspacing="0" border="0"
-                               width="100%">
-                               <h:column>    				
-                                  <f:facet name="header">First Name</f:facet>    				
-                                  #{user.firstName}
-                               </h:column>
-                               <h:column>
-                                  <f:facet name="header">Last Name</f:facet>
-                                  #{user.lastName}
-                               </h:column>
-                               <h:column>
-                                  <f:facet name="header">Reason For Account</f:facet>
-                                  #{user.accountReason}
-                               </h:column>
-                               <h:column>
-                                  <f:facet name="header">Approval</f:facet>
-                                  <h:form>
-                                    <div class="btn-group" role="group" aria-label="...">
-                                        <h:commandLink action="#{user.approveAccount()}" styleClass="btn btn-success"><i class="menu-icon icon-ok"></i></h:commandLink>
-                                        <h:commandLink action="#{adminController.deny()}" styleClass="btn btn-danger"><i class="menu-icon icon-remove"></i></h:commandLink>
-                                    </div>
-                                  </h:form>
-                               </h:column>
+                                         styleClass="datatable-1 table table-bordered table-striped display"
+                                         cellpadding="0" cellspacing="0" border="0"
+                                         width="100%">
+                                <h:column>    				
+                                    <f:facet name="header">First Name</f:facet>    				
+                                        #{user.firstName}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Last Name</f:facet>
+                                        #{user.lastName}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Reason For Account</f:facet>
+                                        #{user.accountReason}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Approval</f:facet>
+                                    <h:form>
+                                        <div class="btn-group" role="group" aria-label="...">
+                                            <h:commandLink action="#{user.approveAccount()}" styleClass="btn btn-success"><i class="menu-icon icon-ok"></i></h:commandLink>
+                                            <h:commandLink action="#{adminController.deny()}" styleClass="btn btn-danger"><i class="menu-icon icon-remove"></i></h:commandLink>
+                                        </div>
+                                    </h:form>
+                                </h:column>
                             </h:dataTable>
                         </div>
                     </div>
@@ -57,26 +57,32 @@
                         </div>
                         <div class="module-body table">    
                             <h:dataTable value="#{adminController.approvedUsers}" var="user"
-                               styleClass="datatable-1 table table-bordered table-striped display"
-                               cellpadding="0" cellspacing="0" border="0"
-                               width="100%">
-                               <h:column>    				
-                                  <f:facet name="header">First Name</f:facet>    				
-                                  #{user.firstName}
-                               </h:column>
-                               <h:column>
-                                  <f:facet name="header">Last Name</f:facet>
-                                  #{user.lastName}
-                               </h:column>
-                               <h:column>
-                                  <f:facet name="header">Username</f:facet>
-                                  #{user.userID}
-                               </h:column>
+                                         styleClass="datatable-1 table table-bordered table-striped display"
+                                         cellpadding="0" cellspacing="0" border="0"
+                                         width="100%">
+                                <h:column>    				
+                                    <f:facet name="header">First Name</f:facet>    				
+                                        #{user.firstName}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Last Name</f:facet>
+                                        #{user.lastName}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Username</f:facet>
+                                        #{user.userID}
+                                </h:column>
                             </h:dataTable>
                         </div>
                     </div>
                 </div>
             </div>
         </ui:define>
+
+        <ui:define name="scripts">
+            <script src="/ISURepository/resources/scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
+            <script src="/ISURepository/resources/scripts/common.js" type="text/javascript"></script>
+        </ui:define>
+
     </ui:composition>
 </html>

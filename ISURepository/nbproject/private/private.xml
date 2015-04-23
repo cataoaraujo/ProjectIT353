@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/ProjectIT353/ISURepository/src/java/Controller/SearchController.java</file>
+            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/ProjectIT353/ISURepository/web/admin/usersAccounts.xhtml</file>
+            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/ProjectIT353/ISURepository/web/admin/adminTheses.xhtml</file>
+            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/ProjectIT353/ISURepository/web/admin/adminDashboard.xhtml</file>
+            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/ProjectIT353/ISURepository/web/resources/css/theme.css</file>
+            <file>file:/C:/Users/Gabriel/Documents/NetBeansProjects/ProjectIT353/ISURepository/web/templates/content.xhtml</file>
         </group>
     </open-files>
 </project-private>

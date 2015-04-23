@@ -12,7 +12,7 @@
         </ui:define>
 
         <ui:define name="sidebar">
-             <ui:include src="/admin/sidebarAdmin.xhtml"/>
+            <ui:include src="/admin/sidebarAdmin.xhtml"/>
         </ui:define>
 
         <ui:define name="content">
@@ -24,30 +24,36 @@
                         </div>
                         <div class="module-body table">    
                             <h:dataTable value="#{adminController.allProjects}" var="p"
-                               styleClass="datatable-1 table table-bordered table-striped display"
-                               cellpadding="0" cellspacing="0" border="0"
-                               width="100%">
-                               <h:column>    				
-                                  <f:facet name="header">Name</f:facet>    				
-                                  #{p.name}
-                               </h:column>
-                               <h:column>
-                                  <f:facet name="header">Abstract</f:facet>
-                                  #{p.projectAbstract}
-                               </h:column>
-                               <h:column>
-                                  <f:facet name="header">Reason For Account</f:facet>
-                                  #{p.semester}
-                               </h:column>
-                               <h:column>
-                                  <f:facet name="header">Submitted By</f:facet>
-                                  #{p.user.firstName} #{p.user.lastName}
-                               </h:column>
+                                         styleClass="datatable-1 table table-bordered table-striped display"
+                                         cellpadding="0" cellspacing="0" border="0"
+                                         width="100%">
+                                <h:column>    				
+                                    <f:facet name="header">Name</f:facet>    				
+                                        #{p.name}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Abstract</f:facet>
+                                        #{p.projectAbstract}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Reason For Account</f:facet>
+                                        #{p.semester}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Submitted By</f:facet>
+                                        #{p.user.firstName} #{p.user.lastName}
+                                </h:column>
                             </h:dataTable>
                         </div>
                     </div>
                 </div>
             </div>
         </ui:define>
+
+        <ui:define name="scripts">
+            <script src="/ISURepository/resources/scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
+            <script src="/ISURepository/resources/scripts/common.js" type="text/javascript"></script>
+        </ui:define>
+
     </ui:composition>
 </html>

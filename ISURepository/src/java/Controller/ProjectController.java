@@ -82,7 +82,7 @@ public class ProjectController {
         project.setKeywords(new ArrayList<>(Arrays.asList(ks)));
         System.out.println(userController.getUser().getFirstName() + "*******************");
         if (project.add()) {
-            return "../index.hmtl";
+            return "myProjects.xhtml";
         }
         return "error.xhtml";
     }
