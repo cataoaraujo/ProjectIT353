@@ -48,7 +48,8 @@ public class UserController {
     public String createUser() {
         if (user.add()) {
             //sendEmail();
-            logged = true;
+            //logged = true;
+            user = new User();
             return "index.xhtml";
         }
         return "signup.xhtml";
@@ -64,12 +65,12 @@ public class UserController {
                 return "index.xhtml";
             } else {
                 attempts++;
-                msg = "Wrong UserID or Password!";
-                return "error.xhtml";
+                msg = "Wrong UserID/Password! Or account is not approved!";
+                return "login.xhtml";
             }
         }
         msg = "You are limited to a max of 3 attempts per session, try again later!";
-        return "error.xhtml";
+        return "login.xhtml";
     }
 
     public String update() {
