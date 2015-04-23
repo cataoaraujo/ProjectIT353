@@ -7,8 +7,11 @@ package Controller;
 
 import Model.User;
 import java.util.Properties;
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -43,6 +46,12 @@ public class UserController {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public void cleanError(ComponentSystemEvent event) {
+        if (!FacesContext.getCurrentInstance().isPostback()) {
+            msg = "";
+        }
     }
 
     public String createUser() {

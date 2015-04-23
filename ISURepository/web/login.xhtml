@@ -16,6 +16,7 @@
         </ui:define>
 
         <ui:define name="content">
+            <f:event listener="#{userController.cleanError}" type="preRenderView" />
             <div class="module module-login span4 offset4">
                 <h:form class="form-vertical">
                     <div class="module-head">
