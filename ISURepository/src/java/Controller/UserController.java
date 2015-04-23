@@ -143,7 +143,7 @@ public class UserController {
     public String logoffSecure() {
         user = new User();
         logged = false;
-        return "/index.xhtml";
+        return "/index.xhtml?faces-redirect=true";
     }
 
     public boolean isLogged() {

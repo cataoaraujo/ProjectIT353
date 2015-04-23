@@ -50,7 +50,5 @@ public class SearchController {
     public void setResult(ArrayList<Project> result) {
         this.result = result;
     }
-    
-    
 
 }
