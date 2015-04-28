@@ -16,154 +16,71 @@
         </ui:define>
 
         <ui:define name="content">
+            <h:form>
+                <div class="span9">
+                    <div class="content">
+                        <div class="module">
+                            <div class="module-head">
+                                 <h3>Highlighted Projects</h3>
+                            </div>
+                            <div class="module-body">
+                                <div class="stream-list">
 
-            <div class="span9">
-                <div class="content">
-                    <div class="module">
-                        <div class="module-head">
-                            <h3>Highlighted Projects</h3>
-                        </div>
-                        <div class="module-body">
-                            <div class="stream-list">
-
-                                <!-- REPETED PART -->
-                                <div class="media stream">
-                                    <a href="#" class="media-avatar medium pull-left">
-                                        <img src="resources/images/user.png" />
-                                    </a>
-                                    <div class="media-body">
-                                        <div class="stream-headline">
-                                            <h5 class="stream-author">
-                                                Title of the project
-                                                <small>Autor name</small>
-                                            </h5>
-                                            <div class="stream-text">
-                                                <p>Abstract Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </p>
-                                                <p>Abstract Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </p>
-                                            </div>
-                                            <div class="stream-text">
-                                                <ol class="inline">
-                                                    <li><a href="#">#keyword</a></li>
-                                                    <li><a href="#">#keyword</a></li>
-                                                    <li><a href="#">#keyword</a></li>
-                                                    <li><a href="#">#keyword</a></li>
-                                                    <li><a href="#">#keyword</a></li>
-                                                </ol>
+                                    <!-- REPETED PART -->
+                                    <ui:repeat var="p" value="#{searchController.findShocase()}" varStatus="status">
+                                        <div class="media stream">
+                                            <img class="media-avatar medium pull-left" src="resources/images/user.png" />
+                                            <div class="media-body">
+                                                <div class="stream-headline">
+                                                    <h5 class="stream-author">
+                                                        #{p.name}
+                                                        <small>#{p.user.firstName} #{p.user.lastName}</small>
+                                                    </h5>
+                                                    <div class="stream-text">
+                                                        <p>#{p.projectAbstract}</p>
+                                                    </div>
+                                                    <div class="stream-text">
+                                                        <ol class="inline">
+                                                            <ui:repeat var="k" value="#{p.keywords}" varStatus="status">
+                                                                <li><a href="#">##{k}</a></li>
+                                                            </ui:repeat>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                                <div class="stream-options"> 
+                                                    <a href="./secure/projectDetails.xhtml?id=#{p.id}" class="btn btn-small">
+                                                        <i class="icon-plus shaded"></i>
+                                                        More details
+                                                    </a>
+                                                    <a href="#{p.liveLink}" class="btn btn-small">
+                                                        <i class="icon-cloud shaded"></i>
+                                                        Live version
+                                                    </a>
+                                                    <a href="#" class="btn btn-small disabled">
+                                                        <i class="icon-reply shaded"></i>
+                                                        Export
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="stream-options">
-                                            <a href="#" class="btn btn-small">
-                                                <i class="icon-cloud shaded"></i>
-                                                Live version
-                                            </a>
-                                            <a href="#" class="btn btn-small">
-                                                <i class="icon-reply shaded"></i>
-                                                Export
-                                            </a>
-                                            <a href="#" class="btn btn-small">
-                                                <i class="icon-plus shaded"></i>
-                                                More details
-                                            </a>
-                                        </div>
+                                    </ui:repeat>
+                                    <!-- END REPETED PART -->
+
+                                    <!--                                    
+                                    <div class="media stream load-more">
+                                        <a href="#">
+                                            <i class="icon-refresh shaded"></i>
+                                            show more...
+                                        </a>
                                     </div>
-                                </div>
-
-                                <div class="media stream">
-                                    <a href="#" class="media-avatar medium pull-left">
-                                        <img src="resources/images/user.png" />
-                                    </a>
-                                    <div class="media-body">
-                                        <div class="stream-headline">
-                                            <h5 class="stream-author">
-                                                Title of the project
-                                                <small>Autor name</small>
-                                            </h5>
-                                            <div class="stream-text">
-                                                <p>Abstract Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </p>
-                                                <p>Abstract Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </p>
-                                            </div>
-                                            <div class="stream-text">
-                                                <ol class="inline">
-                                                    <li><a href="#">#keyword</a></li>
-                                                    <li><a href="#">#keyword</a></li>
-                                                    <li><a href="#">#keyword</a></li>
-                                                    <li><a href="#">#keyword</a></li>
-                                                    <li><a href="#">#keyword</a></li>
-                                                </ol>
-                                            </div>
-                                        </div>
-                                        <div class="stream-options">
-                                            <a href="#" class="btn btn-small">
-                                                <i class="icon-cloud shaded"></i>
-                                                Live version
-                                            </a>
-                                            <a href="#" class="btn btn-small">
-                                                <i class="icon-reply shaded"></i>
-                                                Export
-                                            </a>
-                                            <a href="#" class="btn btn-small">
-                                                <i class="icon-plus shaded"></i>
-                                                More details
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="media stream">
-                                    <a href="#" class="media-avatar medium pull-left">
-                                        <img src="resources/images/user.png" />
-                                    </a>
-                                    <div class="media-body">
-                                        <div class="stream-headline">
-                                            <h5 class="stream-author">
-                                                Title of the project
-                                                <small>Autor name</small>
-                                            </h5>
-                                            <div class="stream-text">
-                                                <p>Abstract Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </p>
-                                                <p>Abstract Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type. </p>
-                                            </div>
-                                            <div class="stream-text">
-                                                <ol class="inline">
-                                                    <li><a href="#">#keyword</a></li>
-                                                    <li><a href="#">#keyword</a></li>
-                                                    <li><a href="#">#keyword</a></li>
-                                                    <li><a href="#">#keyword</a></li>
-                                                    <li><a href="#">#keyword</a></li>
-                                                </ol>
-                                            </div>
-                                        </div>
-                                        <div class="stream-options">
-                                            <a href="#" class="btn btn-small">
-                                                <i class="icon-cloud shaded"></i>
-                                                Live version
-                                            </a>
-                                            <a href="#" class="btn btn-small">
-                                                <i class="icon-reply shaded"></i>
-                                                Export
-                                            </a>
-                                            <a href="#" class="btn btn-small">
-                                                <i class="icon-plus shaded"></i>
-                                                More details
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- END REPETED PART -->
-
-                                <div class="media stream load-more">
-                                    <a href="#">
-                                        <i class="icon-refresh shaded"></i>
-                                        show more...
-                                    </a>
+                                    -->
                                 </div>
                             </div>
                         </div>
+
                     </div>
-
                 </div>
-            </div>
-
+            </h:form>
         </ui:define>
     </ui:composition>
 

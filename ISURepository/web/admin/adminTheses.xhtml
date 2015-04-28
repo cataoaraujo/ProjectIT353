@@ -44,23 +44,21 @@
                                         #{p.user.firstName} #{p.user.lastName}
                                 </h:column>
                                 <h:column>
+                                    <h:form>
+                                        <h:commandLink action="#{p.showcase()}" rendered="#{!p.highlighted}" class="btn">
+                                            <i class="icon-star-empty menu-icon"></i> 
 
+                                        </h:commandLink>
+                                        <h:commandLink action="#{p.removeShowcase()}" rendered="#{p.highlighted}" class="btn btn-warning">
+                                            <i class="icon-star menu-icon"></i>
+
+                                        </h:commandLink>
+                                    </h:form>
+                                </h:column>
+                                <h:column>
                                     <a href="./projectDetails.xhtml?id=#{p.id}" class="btn btn-info">
                                         <i class="menu-icon icon-info-sign"></i>
                                     </a>
-
-                                </h:column>
-                                <h:column>
-                                    <h:form>
-                                        <h:commandLink action="#{p.showcase()}" rendered="#{!p.highlighted}" class="btn btn-success">
-                                            <i class="icon-pushpin menu-icon"></i>
-                                            Showcase
-                                        </h:commandLink>
-                                        <h:commandLink action="#{p.removeShowcase()}" rendered="#{p.highlighted}" class="btn btn-danger">
-                                            <i class="icon-pushpin menu-icon"></i>
-                                            Remove Showcase
-                                        </h:commandLink>
-                                    </h:form>
                                 </h:column>
                             </h:dataTable>
                         </div>

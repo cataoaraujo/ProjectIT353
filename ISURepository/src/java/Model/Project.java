@@ -210,6 +210,7 @@ public class Project {
                 ps.setString(3, "%" + keyword + "%");
                 ps.setString(4, "%" + keyword + "%");
                 ps.setString(5, "%" + keyword + "%");
+                ps.setMaxRows(20); 
                 ResultSet result = ps.executeQuery();
                 while (result.next()) {
                     Project p = Project.findById(result.getInt("ID"));
@@ -219,6 +220,50 @@ public class Project {
                 System.out.println(ex.toString());
             }
         }
+        return projects;
+    }
+
+    public static ArrayList<Project> findShocase() {
+        ArrayList<Project> projects = new ArrayList<>();
+
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement(""
+                    + "SELECT PROJECT.ID "
+                    + "FROM PROJECT "
+                    + "WHERE PROJECT.HIGHLIGHTED = true");
+            ps.setMaxRows(10); 
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                Project p = Project.findById(result.getInt("ID"));
+                projects.add(p);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+
+        return projects;
+    }
+    
+    public static ArrayList<Project> findNewProjects() {
+        ArrayList<Project> projects = new ArrayList<>();
+
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement(""
+                    + "SELECT PROJECT.ID "
+                    + "FROM PROJECT "
+                    + "ORDER BY PROJECT.DATECREATED");
+            ps.setMaxRows(5); 
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                Project p = Project.findById(result.getInt("ID"));
+                projects.add(p);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+
         return projects;
     }
 
@@ -325,8 +370,8 @@ public class Project {
 
     public void setHighlighted(boolean highlighted) {
         this.highlighted = highlighted;
-    }    
-    
+    }
+
     public void updateHighlighted(boolean highlighted) {
         this.highlighted = highlighted;
         Connection conn = Database.connect2DB();
@@ -340,9 +385,8 @@ public class Project {
             System.out.println(ex.toString());
         }
     }
-    
-    public void showcase()
-    {
+
+    public void showcase() {
         this.highlighted = true;
         Connection conn = Database.connect2DB();
         try {
@@ -355,9 +399,8 @@ public class Project {
             System.out.println(ex.toString());
         }
     }
-    
-    public void removeShowcase()
-    {
+
+    public void removeShowcase() {
         this.highlighted = false;
         Connection conn = Database.connect2DB();
         try {
