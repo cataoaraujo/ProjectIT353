@@ -195,15 +195,4 @@ public class ProjectController {
     public void setId(int id) {
         this.id = id;
     }
-    
-    public void showcase()
-    {
-        this.project.updateHighlighted(true);
-    }
-    
-    public void removeShowcase()
-    {
-        this.project.updateHighlighted(false);
-    }
-
 }

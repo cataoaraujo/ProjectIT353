@@ -340,6 +340,36 @@ public class Project {
             System.out.println(ex.toString());
         }
     }
+    
+    public void showcase()
+    {
+        this.highlighted = true;
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("UPDATE Project SET highlighted = ? WHERE id = ?");
+            ps.setBoolean(1, true);
+            ps.setInt(2, id);
+            System.out.println(id);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
+    
+    public void removeShowcase()
+    {
+        this.highlighted = false;
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("UPDATE Project SET highlighted = ? WHERE id = ?");
+            ps.setBoolean(1, false);
+            ps.setInt(2, id);
+            System.out.println(id);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
 
     public ArrayList<Submissions> getSubmissions() {
         return submissions;
