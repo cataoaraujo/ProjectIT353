@@ -50,6 +50,18 @@
                                     </a>
 
                                 </h:column>
+                                <h:column>
+                                    <h:form>
+                                        <h:commandLink action="#{projectController.showcase()}" rendered="#{!projectController.project.highlighted}" class="btn btn-success">
+                                            <i class="icon-pushpin menu-icon"></i>
+                                            Showcase
+                                        </h:commandLink>
+                                            <h:commandLink action="#{projectController.removeShowcase()}" rendered="#{projectController.project.highlighted}" class="btn btn-danger">
+                                            <i class="icon-pushpin menu-icon"></i>
+                                            Remove Showcase
+                                        </h:commandLink>
+                                    </h:form>
+                                </h:column>
                             </h:dataTable>
                         </div>
                     </div>

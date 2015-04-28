@@ -325,6 +325,20 @@ public class Project {
 
     public void setHighlighted(boolean highlighted) {
         this.highlighted = highlighted;
+    }    
+    
+    public void updateHighlighted(boolean highlighted) {
+        this.highlighted = highlighted;
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("UPDATE Project SET highlighted = ? WHERE id = ?");
+            ps.setBoolean(1, highlighted);
+            ps.setInt(2, id);
+            System.out.println(id);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
     }
 
     public ArrayList<Submissions> getSubmissions() {
