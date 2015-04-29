@@ -228,7 +228,7 @@ public class Project {
         return projects;
     }
 
-    public static ArrayList<Project> findShocase() {
+     public static ArrayList<Project> findShocase() {
         ArrayList<Project> projects = new ArrayList<>();
 
         Connection conn = Database.connect2DB();
@@ -237,7 +237,7 @@ public class Project {
                     + "SELECT PROJECT.ID "
                     + "FROM PROJECT "
                     + "WHERE PROJECT.HIGHLIGHTED = true");
-            ps.setMaxRows(10); 
+            ps.setMaxRows(10);
             ResultSet result = ps.executeQuery();
             while (result.next()) {
                 Project p = Project.findById(result.getInt("ID"));
@@ -249,7 +249,7 @@ public class Project {
 
         return projects;
     }
-    
+
     public static ArrayList<Project> findNewProjects() {
         ArrayList<Project> projects = new ArrayList<>();
 
@@ -259,7 +259,37 @@ public class Project {
                     + "SELECT PROJECT.ID "
                     + "FROM PROJECT "
                     + "ORDER BY PROJECT.DATECREATED");
-            ps.setMaxRows(5); 
+            ps.setMaxRows(10);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                Project p = Project.findById(result.getInt("ID"));
+                projects.add(p);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+
+        return projects;
+    }
+
+    public static ArrayList<Project> findRelatedProjects(int id) {
+        ArrayList<Project> projects = new ArrayList<>();
+        
+        System.out.println("parameter "+id);
+
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement(""
+                    + "SELECT PROJECT.ID FROM PROJECT, ProjectKeywords "
+                    + "WHERE PROJECT.ID = ProjectKeywords.project_id "
+                    + "AND ProjectKeywords.keyword_id IN("
+                    + "SELECT ProjectKeywords.keyword_id FROM PROJECT, ProjectKeywords "
+                    + "WHERE PROJECT.ID = ProjectKeywords.project_id "
+                    + "AND PROJECT.ID = ?)"
+                    + "AND PROJECT.ID != ?");
+            ps.setInt(1,id);
+            ps.setInt(2,id);
+            ps.setMaxRows(3);
             ResultSet result = ps.executeQuery();
             while (result.next()) {
                 Project p = Project.findById(result.getInt("ID"));

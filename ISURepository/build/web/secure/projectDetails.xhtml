@@ -10,7 +10,7 @@
         </ui:define>
 
         <ui:define name="sidebar">
-            <ui:include src="/secure/sidebarSecure.xhtml"/>
+           <ui:include src="../templates/sidebar.xhtml"/>
         </ui:define>
 
         <ui:define name="content">
@@ -104,84 +104,32 @@
                             <h3>Related Projects</h3>
                         </div>
                         <div class="module-body row-fluid">
-                            <div class="span4">
-                                <h5 class="stream-author">
-                                    Project Title
-                                </h5>
-                                <div class="stream-headline">
-                                    <div class="stream-text">   
-                                        <ol class="inline">
-                                            <li><a href="#">#Similar_keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                        </ol>
+                            <ui:repeat var="rp" value="#{projectController.project.findRelatedProjects(projectController.project.id)}" varStatus="status">
+                                <div class="span4">
+                                    <h5 class="stream-author">
+                                        #{rp.name}
+                                    </h5>
+                                    <div class="stream-headline">
+                                        <div class="stream-text">   
+                                            <ol class="inline">
+                                                <ui:repeat var="k" value="#{rp.keywords}" varStatus="status">
+                                                    <li><a href="#">##{k}</a></li>
+                                                </ui:repeat>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <div class="stream-options">
+                                        <a href="projectDetails.xhtml?id=#{rp.id}" class="btn btn-small">
+                                            <i class="icon-plus shaded"></i>
+                                            More details
+                                        </a>
+                                        <a href="#{rp.liveLink}" class="btn btn-small">
+                                            <i class="icon-cloud shaded"></i>
+                                            Live version
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="stream-options">
-                                    <a href="#" class="btn btn-small">
-                                        <i class="icon-cloud shaded"></i>
-                                        Live version
-                                    </a>
-                                    <a href="#" class="btn btn-small">
-                                        <i class="icon-plus shaded"></i>
-                                        More details
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="span4">
-                                <h5 class="stream-author">
-                                    Project Title
-                                </h5>
-                                <div class="stream-headline">
-                                    <div class="stream-text">   
-                                        <ol class="inline">
-                                            <li><a href="#">#Similar_keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                        </ol>
-                                    </div>
-                                </div>
-                                <div class="stream-options">
-                                    <a href="#" class="btn btn-small">
-                                        <i class="icon-cloud shaded"></i>
-                                        Live version
-                                    </a>
-                                    <a href="#" class="btn btn-small">
-                                        <i class="icon-plus shaded"></i>
-                                        More details
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="span4">
-                                <h5 class="stream-author">
-                                    Project Title
-                                </h5>
-                                <div class="stream-headline">
-                                    <div class="stream-text">   
-                                        <ol class="inline">
-                                            <li><a href="#">#Similar_keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                            <li><a href="#">#keyword</a></li>
-                                        </ol>
-                                    </div>
-                                </div>
-                                <div class="stream-options">
-                                    <a href="#" class="btn btn-small">
-                                        <i class="icon-cloud shaded"></i>
-                                        Live version
-                                    </a>
-                                    <a href="#" class="btn btn-small">
-                                        <i class="icon-plus shaded"></i>
-                                        More details
-                                    </a>
-                                </div>
-                            </div>
+                            </ui:repeat>
                         </div>
                     </div>
 
