@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/templates/content.xhtml">
+
+        <ui:define name="nav">
+            <ui:include src="templates/navcancel.xhtml"/>
+        </ui:define>
+
+        <ui:define name="sidebar">
+
+        </ui:define>
+
+        <ui:define name="content">
+            <f:metadata>
+                <f:viewParam name="cID" value="#{approvalController.committeeID}"/>
+                <f:viewParam name="sID" value="#{approvalController.submissionID}"/>
+            </f:metadata>
+            <div class="module span6 offset3">
+                <form class="form-vertical">
+                    <div class="module-head">
+                        <h3>Approve Project/Thesis</h3>
+                    </div>
+                    <div class="module-body">
+                        <h:form class="form-horizontal row-fluid">
+                            <div class="control-group">
+                                <label class="control-label" for="comment">Comments:</label>
+                                <div class="controls">
+                                    <h:inputTextarea rows="5" id="comment" class="span5" value="#{approvalController.comments}" required="true"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls clearfix">
+                                    <h:commandButton class="btn btn btn-large btn-success span6" value="Approve" action="#{approvalController.approve()}"/>
+                                </div>
+                                <br/>
+                                <div class="controls clearfix">
+                                    <h:commandButton class="btn btn btn-large btn-danger span6" value="Disapprove" action="#{approvalController.disapprove()}"/>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </form>
+            </div>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

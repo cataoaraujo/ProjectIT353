@@ -41,6 +41,11 @@ public class Project {
     private int views;
     private int downloads;
 
+    public enum Situation {
+
+        Done, Available, Unavailable, Submitted
+    }
+	
     public boolean add() {
         Connection conn = Database.connect2DB();
         try {
@@ -282,6 +287,150 @@ public class Project {
             System.out.println(ex.toString());
         }
     }
+	
+	public void updateHighlighted(boolean highlighted) {
+        this.highlighted = highlighted;
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("UPDATE Project SET highlighted = ? WHERE id = ?");
+            ps.setBoolean(1, highlighted);
+            ps.setInt(2, id);
+            System.out.println(id);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
+
+    public void showcase() {
+        this.highlighted = true;
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("UPDATE Project SET highlighted = ? WHERE id = ?");
+            ps.setBoolean(1, true);
+            ps.setInt(2, id);
+            System.out.println(id);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
+
+    public void removeShowcase() {
+        this.highlighted = false;
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("UPDATE Project SET highlighted = ? WHERE id = ?");
+            ps.setBoolean(1, false);
+            ps.setInt(2, id);
+            System.out.println(id);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
+	
+	public String findStatusPercentage() {
+        Situation s1 = presentationStatus();
+        if (s1.equals(Situation.Done)) {
+            return "100% Completed!";
+        } else {
+            if (s1.equals(Situation.Submitted)) {
+                return "83% Completed, Waiting the Presentation be Approved!";
+            }
+            Situation s2 = finalStatus();
+            if (s2.equals(Situation.Done)) {
+                return "66% Completed, Waiting the next submission!";
+            } else {
+                if (s2.equals(Situation.Submitted)) {
+                    return "50% Completed, Waiting the Final Proposal be Approved!";
+                }
+                Situation s3 = preliminaryStatus();
+                if (s3.equals(Situation.Done)) {
+                    return "33% Completed, Waiting the next submission!";
+                } else if (s3.equals(Situation.Submitted)) {
+                    return "16% Completed, Waiting the Preliminary Proposal be Approved!";
+                }
+            }
+        }
+        return "0% Completed, You did not submitted anything yet!";
+    }
+
+    public boolean isPreliminaryOk() {
+        return (preliminaryStatus().equals(Situation.Submitted) || preliminaryStatus().equals(Situation.Done));
+    }
+
+    public boolean isFinalOk() {
+        return (finalStatus().equals(Situation.Submitted) || finalStatus().equals(Situation.Done));
+    }
+
+    public boolean isPresentationOk() {
+        return (presentationStatus().equals(Situation.Submitted) || presentationStatus().equals(Situation.Done));
+    }
+
+    public Situation preliminaryStatus() {
+        Situation s = Situation.Available;
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM ProjectSubmission WHERE project_id = ? AND type = 'Preliminary'");
+            ps.setInt(1, id);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                if (result.getBoolean("approved")) {
+                    s = Situation.Done;
+                } else {
+                    s = Situation.Submitted;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return s;
+    }
+
+    public Situation finalStatus() {
+        Situation s = Situation.Unavailable;
+        if (preliminaryStatus().equals(Situation.Done)) {
+            Connection conn = Database.connect2DB();
+            try {
+                PreparedStatement ps = conn.prepareStatement("SELECT * FROM ProjectSubmission WHERE project_id = ? AND type = 'Final'");
+                ps.setInt(1, id);
+                ResultSet result = ps.executeQuery();
+                while (result.next()) {
+                    if (result.getBoolean("approved")) {
+                        s = Situation.Done;
+                    } else {
+                        s = Situation.Submitted;
+                    }
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
+        return s;
+    }
+
+    public Situation presentationStatus() {
+        Situation s = Situation.Unavailable;
+        if (finalStatus().equals(Situation.Done)) {
+            Connection conn = Database.connect2DB();
+            try {
+                PreparedStatement ps = conn.prepareStatement("SELECT * FROM ProjectSubmission WHERE project_id = ? AND type = 'Presentation'");
+                ps.setInt(1, id);
+                ResultSet result = ps.executeQuery();
+                while (result.next()) {
+                    if (result.getBoolean("approved")) {
+                        s = Situation.Done;
+                    } else {
+                        s = Situation.Submitted;
+                    }
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+        }
+        return s;
+    }
 
     public void addCommittee(Committee committee) {
         committeeMembers.add(committee);
@@ -370,48 +519,6 @@ public class Project {
 
     public void setHighlighted(boolean highlighted) {
         this.highlighted = highlighted;
-    }
-
-    public void updateHighlighted(boolean highlighted) {
-        this.highlighted = highlighted;
-        Connection conn = Database.connect2DB();
-        try {
-            PreparedStatement ps = conn.prepareStatement("UPDATE Project SET highlighted = ? WHERE id = ?");
-            ps.setBoolean(1, highlighted);
-            ps.setInt(2, id);
-            System.out.println(id);
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
-    }
-
-    public void showcase() {
-        this.highlighted = true;
-        Connection conn = Database.connect2DB();
-        try {
-            PreparedStatement ps = conn.prepareStatement("UPDATE Project SET highlighted = ? WHERE id = ?");
-            ps.setBoolean(1, true);
-            ps.setInt(2, id);
-            System.out.println(id);
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
-    }
-
-    public void removeShowcase() {
-        this.highlighted = false;
-        Connection conn = Database.connect2DB();
-        try {
-            PreparedStatement ps = conn.prepareStatement("UPDATE Project SET highlighted = ? WHERE id = ?");
-            ps.setBoolean(1, false);
-            ps.setInt(2, id);
-            System.out.println(id);
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
     }
 
     public ArrayList<Submissions> getSubmissions() {

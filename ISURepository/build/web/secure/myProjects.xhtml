@@ -60,20 +60,36 @@
                                                     Check Status
                                                 </a>
                                             </div>
+                                            <br/>
                                             <div class="stream-options">
-                                                <h5>Submissions:</h5>
-                                                <a href="#" class="btn btn-small btn-success">
-                                                    <i class="icon-paper-clip shaded"></i>
-                                                    Submit Preliminary Proposal
-                                                </a>
-                                                <a href="#" class="btn btn-small btn-danger disabled">
-                                                    <i class="icon-paper-clip shaded"></i>
-                                                    Submit Final Proposal
-                                                </a>
-                                                <a href="#" class="btn btn-small btn-danger disabled">
-                                                    <i class="icon-paper-clip shaded"></i>
-                                                    Submit Presentation Scheduling
-                                                </a>
+                                                <h5>Submissions: <h:outputText value="#{p.findStatusPercentage()}"/></h5>
+                                                <h:link value="Submit Preliminary Proposal" outcome="submitFiles" class="btn btn-small" rendered="#{!p.preliminaryOk}">
+                                                    <f:param name="id" value="#{p.id}" />
+                                                    <f:param name="type" value="Preliminary"/>
+                                                </h:link>
+                                                <h:link value="Submit Preliminary Proposal" outcome="submitFiles" class="btn btn-small btn-success disabled" rendered="#{p.preliminaryOk}">
+                                                    <f:param name="id" value="#{p.id}" />
+                                                    <f:param name="type" value="Preliminary"/>
+                                                </h:link>
+                                                
+                                                <h:link value="Submit Final Proposal" outcome="submitFiles" class="btn btn-small" rendered="#{!p.finalOk}">
+                                                    <f:param name="id" value="#{p.id}" />
+                                                    <f:param name="type" value="Final"/>
+                                                </h:link>
+                                                <h:link value="Submit Final Proposal" outcome="submitFiles" class="btn btn-small btn-success disabled" rendered="#{p.finalOk}">
+                                                    <f:param name="id" value="#{p.id}" />
+                                                    <f:param name="type" value="Final"/>
+                                                </h:link>
+                                                
+                                                <h:link value="Submit Presentation Scheduling" outcome="submitFiles" class="btn btn-small" rendered="#{!p.presentationOk}">
+                                                    <f:param name="id" value="#{p.id}" />
+                                                    <f:param name="type" value="Presentation"/>
+                                                </h:link>
+                                                <h:link value="Submit Presentation Scheduling" outcome="submitFiles" class="btn btn-small btn-success disabled" rendered="#{p.presentationOk}">
+                                                    <f:param name="id" value="#{p.id}" />
+                                                    <f:param name="type" value="Presentation"/>
+                                                </h:link>
+                                                    
                                             </div>
                                         </div>
                                     </div>

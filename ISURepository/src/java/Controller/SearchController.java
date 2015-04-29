@@ -15,18 +15,17 @@ public class SearchController {
 
     public SearchController() {
         projects = new Project();
-        if (query != null && query.isEmpty()) {
+        if (query!=null && query.isEmpty()) {
             result = new ArrayList<>();
-        } else {
+        }else{
             result = Project.findByKeyword(query);
         }
     }
-
-    public ArrayList<Project> findProjects() {
+    
+    public ArrayList<Project> findProjects(){
         result = Project.findByKeyword(query);
         return result;
     }
-
     public ArrayList<Project> findShocase() {
         result = Project.findShocase();
         return result;
