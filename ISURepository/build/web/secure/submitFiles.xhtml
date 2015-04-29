@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/templates/content.xhtml">
+
+        <ui:define name="nav">
+            <ui:include src="/secure/navLogged.xhtml"/>
+        </ui:define>
+
+        <ui:define name="sidebar">
+            <ui:include src="/secure/sidebarSecure.xhtml"/>
+        </ui:define>
+
+        <ui:define name="content">
+            <f:metadata>
+                <f:viewParam name="id" value="#{submissionController.id}"/>
+                <f:viewParam name="type" value="#{submissionController.type}"/>
+            </f:metadata>
+            <f:event listener="#{submissionController.cleanError}" type="preRenderView" />
+            <div class="span9">
+                <div class="content">
+                    <div class="module">
+                        <div class="module-head">
+                            <h3><h:outputText value="#{submissionController.type}"/> Submission - <h:outputText value="#{submissionController.project.name}"/></h3>
+                        </div>
+                        <div class="module-body">
+                            <div class="form-vertical" >
+                                <h:form class="form-horizontal row-fluid" enctype="multipart/form-data">
+                                    <div class="control-group">
+                                        <label class="control-label" for="file">Select File:</label>
+                                        <div class="controls">
+                                            <p:fileUpload value="#{submissionController.file}" mode="simple" required="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls clearfix">
+                                            <h:commandButton class="btn btn pull-left btn-large btn-success" value="Update Profile" action="#{submissionController.upload()}"/>
+                                        </div>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
+

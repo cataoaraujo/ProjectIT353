@@ -42,7 +42,7 @@ CREATE TABLE ProjectSubmission
 (
 submission_id int GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 project_id int NOT NULL,
-document_id int NOT NULL,
+document blob NOT NULL,
 type varchar(45) NOT NULL,
 approved boolean,
 dateSubmitted TIMESTAMP,
@@ -58,12 +58,6 @@ committeeComment varchar(256),
 primary key(submission_id, committee_id)
 );
 
-CREATE TABLE Documents
-(
-id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-documentName varchar(45) NOT NULL,
-documentLink varchar(45) NOT NULL
-);
 
 CREATE TABLE ProjectStatistics
 (

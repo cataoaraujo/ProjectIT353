@@ -5,10 +5,11 @@
  */
 package Controller;
 
+import Model.Project;
 import Model.User;
 import java.util.Properties;
-import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
@@ -27,7 +28,9 @@ public class UserController {
     private int attempts;
     private String msg;
     private boolean logged;
+    private String answer;
 
+    
     public UserController() {
         user = new User();
     }
@@ -47,6 +50,14 @@ public class UserController {
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }    
     
     public boolean haveMsg(){
         if(!msg.equals("")){
@@ -60,6 +71,7 @@ public class UserController {
     public void cleanError(ComponentSystemEvent event) {
         if (!FacesContext.getCurrentInstance().isPostback()) {
             msg = "";
+            answer = "";
         }
     }
 
@@ -90,67 +102,39 @@ public class UserController {
         msg = "You are limited to a max of 3 attempts per session, try again later!";
         return "login.xhtml";
     }
+    
+    public String retrieveInformation(){
+        User u = User.findByUserID(user.getUserID());
+        if(u!=null){
+            user = u;
+        }else{
+            msg = "There is no UserID '"+user.getUserID()+"'";
+        }
+        return "lostpassword.xhmtl";
+    }
+    
+    public String changePassword(){
+        User u = User.findByUserID(user.getUserID());
+        if(u!=null){
+            if(user.getSecurityAnswer().equals(answer)){
+                user.update();
+                msg = "Update Successfull!";
+                return "login.xhmtl";
+            }else{
+                msg = "Security Answer is Wrong!";
+                return "lostpassword.xhmtl";
+            }
+        }else{
+            msg = "There is no UserID '"+user.getUserID()+"'";
+            return "lostpassword.xhmtl";
+        }
+    }
 
     public String update() {
         if (user.update()) {
             return "profile.xhtml";
         }
         return "error.xhtml";
-    }
-
-    private void sendEmail() {
-        // Recipient's email ID needs to be mentioned.
-        String to = user.getEmail();
-
-        // Sender's email ID needs to be mentioned
-        String from = "rcataoa@ilstu.edu";
-
-        // Assuming you are sending email from this host
-        String host = "smtp.ilstu.edu";
-
-        // Get system properties
-        Properties properties = System.getProperties();
-
-        // Setup mail server
-        properties.setProperty("mail.smtp.host", host);
-       //properties.setProperty("mail.user", "yourID"); // if needed
-        //properties.setProperty("mail.password", "yourPassword"); // if needed
-
-        // Get the default Session object.
-        Session session = Session.getDefaultInstance(properties);
-
-        try {
-            // Create a default MimeMessage object.
-            MimeMessage message = new MimeMessage(session);
-
-            // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
-
-            // Set To: header field of the header.
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-            // Set Subject: header field
-            message.setSubject("Assignment 3 Email!");
-
-            // Send the actual HTML message, as big as you like
-            message.setContent(
-                    "<h1>Your new account information:</h1>"
-                    + "<label>First Name: " + user.getFirstName() + "</label> <br/>\n"
-                    + "<label>Last Name: " + user.getLastName() + "</label><br/>\n"
-                    + "<label>User ID: " + user.getUserID() + "</label><br/>\n"
-                    + "<label>Password: " + user.getPassword() + "</label><br/>\n"
-                    + "<label>Email: " + user.getEmail() + "</label><br/>\n"
-                    + "<label>Security Question: " + user.getSecurityQuestion() + "</label><br/>\n"
-                    + "<label>Answer: " + user.getSecurityAnswer() + "</label><br/>",
-                    "text/html");
-
-            // Send message
-            Transport.send(message);
-            System.out.println("Sent message successfully....");
-        } catch (MessagingException mex) {
-            mex.printStackTrace();
-        }
-
     }
 
     public String logoff() {
@@ -177,4 +161,5 @@ public class UserController {
         }
         return true;
     }
+
 }

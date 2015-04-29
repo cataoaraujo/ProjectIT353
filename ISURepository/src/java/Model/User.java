@@ -159,6 +159,35 @@ public class User {
         }
         return u;
     }
+    
+    public static User findByUserID(String userid) {
+        User u = null;
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM UserAccount WHERE userID = ?");
+            ps.setString(1, userid);
+            ResultSet result = ps.executeQuery();
+            
+            if (result.next()) {
+                u = new User();
+                u.setId(result.getInt("id"));
+                u.setFirstName(result.getString("firstName"));
+                u.setLastName(result.getString("lastName"));
+                u.setUserID(result.getString("userID"));
+                //u.setPassword(result.getString("password"));
+                u.setEmail(result.getString("email"));
+                u.setSecurityQuestion(result.getString("securityQuestion"));
+                u.setSecurityAnswer(result.getString("securityAnswer"));
+                u.setAccountReason(result.getString("accountReason"));
+                u.setType(result.getString("type"));
+                u.setAccountApproval(result.getBoolean("accountApproval"));
+                u.findUserProjects();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return u;
+    }
 
     public void findUserProjects() {
         this.projects = new ArrayList<>();

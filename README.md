@@ -17,15 +17,21 @@ Database
 
 * [x] Update Details (of a Thesis/Project)
 
-* [ ] Request for / Route Approval
+* [x] Request for / Route Approval
 
-* [ ] Setup Routing Chain (order in which approval is processed) <== Admin only
+* [x] Setup Routing Chain (order in which approval is processed) <== Admin only
+
+* [x] Retrieve lost password
 
 ## Tim
 
 * [x] Approve Account <== Admin only
 
-* [ ] Mark Thesis/Project for showcase <== Admin only
+* [x] Mark Thesis/Project for showcase <== Admin only
+
+* [x] Subscribe to Thesis/Project mailing (based on keywords, etc.)
+
+* [x] Unsubscribe from Mailing
 
 * [ ] Print Flyer (for postings at committee members' offices) <== Admin only
 
@@ -33,15 +39,13 @@ Database
 
 ## Gabriel
 
+	* [x] Layout
+
 * [ ] Check Approval Status
 
 * [x] Search for Thesis/Project
 
 * [x] View Details (of a Thesis/Project)
-
-* [ ] Subscribe to Thesis/Project mailing (based on keywords, etc.)
-
-* [ ] Unsubscribe from Mailing
 
 * [ ] Highlight/Showcase Thesis/Project 
 
@@ -53,6 +57,6 @@ Database
 
 * [ ] Export Thesis/Project (to XML/JSON format)
 
-* [ ] Retrieve lost password
+
 
 
