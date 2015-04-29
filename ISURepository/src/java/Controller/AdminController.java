@@ -22,7 +22,6 @@ public class AdminController {
     private ArrayList<User> unapprovedUsers;
     private ArrayList<User> approvedUsers;
     private ArrayList<Project> allProjects; 
-    private ArrayList<Project> highlightedProjects; 
     private User selectedUser;
     private int userAmount;
     
@@ -154,14 +153,7 @@ public class AdminController {
         }
         return allProjects;
     }
-
-    /**
-     * @return the highlightedProjects
-     */
-    public ArrayList<Project> getHighlightedProjects() {
-        return highlightedProjects;
-    }
-
+    
     /**
      * @return the userAmount
      */
