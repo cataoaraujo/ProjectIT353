@@ -20,7 +20,7 @@
                 <div class="content">
                     <div class="module">
                         <div class="module-head">
-                            <h3>Check Status - #{projectController.project.name}</h3>
+                            <h3>Check Status</h3>
                         </div>
                         <div class="module-body">
                             <div class="stream-list">
@@ -42,13 +42,22 @@
                                                     </ui:repeat>
                                                 </div>
                                             </div>
-                                            <div class="stream-options">
-                                                
-                                            </div>
                                         </div>
                                     </div>
                                 </ui:repeat>
                                 <!-- END REPETED PART -->
+                                
+                                <h:panelGroup layout="block" rendered="#{!projectController.project.hasSubmissions()}">
+                                     <div class="media stream">
+                                        <div class="media-body">
+                                            <div class="stream-headline">
+                                                <div class="alert-error alert">
+                                                   You do not have any update
+                                                </div>
+                                            </div>
+                                        </div>
+                                     </div>
+                                </h:panelGroup>
 
                             </div>
                         </div>

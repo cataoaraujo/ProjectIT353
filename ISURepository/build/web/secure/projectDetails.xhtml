@@ -2,7 +2,9 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml" 
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/templates/content.xhtml">
 
@@ -42,13 +44,13 @@
                                                 </div>
                                                 <div class="span4 stream-author">
                                                     <h5>Course / Semester: </h5> 
-                                                    <span class="row-fluid">Professor First Last Name</span> 
                                                     <span class="row-fluid">#{projectController.project.courseNumber} / #{projectController.project.semester}</span> 
                                                 </div>
                                                 <div class="span4 stream-author">
-                                                    <h5>Committee Chair </h5> 
-                                                    <span class="row-fluid">Professor First Last Name</span> 
-                                                    <span class="row-fluid">Professor First Last Name</span> 
+                                                    <h5>Committee</h5> 
+                                                    <ui:repeat var="c" value="#{projectController.project.committeeMembers}" varStatus="status">
+                                                        <span class="row-fluid">#{c.name} - #{c.type}</span> 
+                                                    </ui:repeat>
                                                 </div>
                                             </div>
                                             <div class="stream-text">   
@@ -81,21 +83,18 @@
                                             </a>
                                         </div>
                                         <br/>
-                                        <div class="stream-options">
-                                            <h5>Documents:</h5> 
-                                            <a href="#" class="btn btn-small">
-                                                <i class="icon-paper-clip shaded"></i>
-                                                Preliminary Proposal
-                                            </a>
-                                            <a href="#" class="btn btn-small">
-                                                <i class="icon-paper-clip shaded"></i>
-                                                Final Proposal
-                                            </a>
-                                            <a href="#" class="btn btn-small">
-                                                <i class="icon-paper-clip shaded"></i>
-                                                Presentation Scheduling
-                                            </a>
-                                        </div>
+                                        <h:panelGroup layout="block" rendered="#{projectController.project.hasSubmissions()}">
+                                            <div class="stream-options">
+                                                <h5>Documents:</h5> 
+                                                <h:form>
+                                                    <ui:repeat var="s" value="#{projectController.project.submissions}" varStatus="status">
+                                                        <h:outputLink  value="#" class="btn btn-small" >
+                                                            <i class="icon-paper-clip shaded"></i> #{s.type}
+                                                        </h:outputLink> 
+                                                    </ui:repeat>
+                                                </h:form>
+                                            </div>
+                                        </h:panelGroup>
                                     </div>
                                 </div>
                             </div>

@@ -25,6 +25,9 @@
                                 <h:link outcome="/admin/adminDashboard.xhtml" rendered="#{userController.isAdmin()}">Admin</h:link>
                             </li>
                             <li>
+                                <h:link outcome="myProjects.xhtml" rendered="#{userController.logged}">Projects</h:link>
+                            </li>
+                            <li>
                                 <h:link outcome="profile.xhtml" rendered="#{userController.logged}">Profile</h:link>
                             </li>
                             <li>

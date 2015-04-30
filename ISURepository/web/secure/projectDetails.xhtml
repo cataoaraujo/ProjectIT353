@@ -83,16 +83,18 @@
                                             </a>
                                         </div>
                                         <br/>
-                                        <div class="stream-options">
-                                            <h5>Documents:</h5> 
-                                            <h:form>
-                                                <ui:repeat var="s" value="#{projectController.project.submissions}" varStatus="status">
-                                                    <h:outputLink  value="#" class="btn btn-small" >
-                                                        <i class="icon-paper-clip shaded"></i> #{s.type}
-                                                    </h:outputLink> 
-                                                </ui:repeat>
-                                            </h:form>
-                                        </div>
+                                        <h:panelGroup layout="block" rendered="#{projectController.project.hasSubmissions()}">
+                                            <div class="stream-options">
+                                                <h5>Documents:</h5> 
+                                                <h:form>
+                                                    <ui:repeat var="s" value="#{projectController.project.submissions}" varStatus="status">
+                                                        <h:outputLink  value="#" class="btn btn-small" >
+                                                            <i class="icon-paper-clip shaded"></i> #{s.type}
+                                                        </h:outputLink> 
+                                                    </ui:repeat>
+                                                </h:form>
+                                            </div>
+                                        </h:panelGroup>
                                     </div>
                                 </div>
                             </div>

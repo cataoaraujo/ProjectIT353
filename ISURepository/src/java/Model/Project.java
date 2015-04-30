@@ -13,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-//import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.faces.context.FacesContext;
@@ -45,20 +44,6 @@ public class Project {
 
     private int views;
     private int downloads;
-
-    /**
-     * @return the relatedProjects
-     */
-    public ArrayList<Project> getRelatedProjects() {
-        return relatedProjects;
-    }
-
-    /**
-     * @param relatedProjects the relatedProjects to set
-     */
-    public void setRelatedProjects(ArrayList<Project> relatedProjects) {
-        this.relatedProjects = relatedProjects;
-    }
 
     public enum Situation {
 
@@ -387,27 +372,27 @@ public class Project {
     public String findStatusPercentage() {
         Situation s1 = presentationStatus();
         if (s1.equals(Situation.Done)) {
-            return "100% Completed!";
+            return "100% Completed";
         } else {
             if (s1.equals(Situation.Submitted)) {
-                return "83% Completed, Waiting the Presentation be Approved!";
+                return "83% Completed. Waiting the Presentation be Approved";
             }
             Situation s2 = finalStatus();
             if (s2.equals(Situation.Done)) {
-                return "66% Completed, Waiting the next submission!";
+                return "66% Completed. Waiting the next submission";
             } else {
                 if (s2.equals(Situation.Submitted)) {
-                    return "50% Completed, Waiting the Final Proposal be Approved!";
+                    return "50% Completed. Waiting the Final Proposal be Approved";
                 }
                 Situation s3 = preliminaryStatus();
                 if (s3.equals(Situation.Done)) {
-                    return "33% Completed, Waiting the next submission!";
+                    return "33% Completed, Waiting the next submission";
                 } else if (s3.equals(Situation.Submitted)) {
-                    return "16% Completed, Waiting the Preliminary Proposal be Approved!";
+                    return "16% Completed. Waiting the Preliminary Proposal be Approved";
                 }
             }
         }
-        return "0% Completed, You did not submitted anything yet!";
+        return "0% Completed";
     }
 
     public boolean isPreliminaryOk() {
@@ -635,6 +620,13 @@ public class Project {
     public void setSubmissions(ArrayList<Submissions> submissions) {
         this.submissions = submissions;
     }
+    
+    public boolean hasSubmissions(){
+        if(submissions.size() > 0)
+            return true;
+        else
+            return false;
+    }
 
     public ArrayList<Committee> getCommitteeMembers() {
         return committeeMembers;
@@ -666,6 +658,14 @@ public class Project {
 
     public void setDownloads(int downloads) {
         this.downloads = downloads;
+    }
+    
+    public ArrayList<Project> getRelatedProjects() {
+        return relatedProjects;
+    }
+
+    public void setRelatedProjects(ArrayList<Project> relatedProjects) {
+        this.relatedProjects = relatedProjects;
     }
 
 }
