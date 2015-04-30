@@ -22,6 +22,11 @@ public class SearchController {
         }
     }
     
+    public String search(){
+    
+        return "search.xhtml?faces-redirect=true&term="+query;
+    }
+    
     public ArrayList<Project> findProjects(){
         result = Project.findByKeyword(query);
         return result;

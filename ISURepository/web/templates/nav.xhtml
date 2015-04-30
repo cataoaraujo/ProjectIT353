@@ -17,7 +17,7 @@
                 <div class="nav-collapse collapse navbar-inverse-collapse">
                     <h:form class="navbar-search pull-left input-append">
                         <h:inputText id="searchQuery" class="span3" value="#{searchController.query}"/>
-                        <h:commandLink class="btn" action="./search.xhtml"><i class="icon-search"></i></h:commandLink>
+                        <h:commandLink class="btn" action="#{searchController.search()}"><i class="icon-search"></i></h:commandLink>
                     </h:form>
                     <h:form>
                         <ul class="nav pull-right">

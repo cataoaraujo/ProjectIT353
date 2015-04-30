@@ -21,6 +21,9 @@
                     <div class="content">
                         <div class="module">
                             <div class="module-head">
+                                <f:metadata>
+                                    <f:viewParam name="term" value="#{searchController.query}" />
+                                </f:metadata>
                                 <h3>Search: <h:outputText value="#{searchController.query}"></h:outputText></h3>
                             </div>
                             <div class="module-body">
