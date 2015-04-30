@@ -57,7 +57,7 @@
                                                 <h5>Keywords: </h5>
                                                 <ol class="inline">
                                                     <ui:repeat var="k" value="#{projectController.project.keywords}" varStatus="status">
-                                                        <li><a href="#">##{k}</a></li>
+                                                        <li><a href="../search.xhtml?term=#{k}">##{k}</a></li>
                                                     </ui:repeat>
                                                 </ol>
                                             </div>
@@ -115,7 +115,7 @@
                                             <div class="stream-text">   
                                                 <ol class="inline">
                                                     <ui:repeat var="k" value="#{rp.keywords}" varStatus="status">
-                                                        <li><a href="#">##{k}</a></li>
+                                                        <li><a href="../search.xhtml?term=#{k}">##{k}</a></li>
                                                     </ui:repeat>
                                                 </ol>
                                             </div>

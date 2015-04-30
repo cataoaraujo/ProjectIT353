@@ -18,88 +18,89 @@
         <ui:define name="content">
             <div class="span9">
                 <div class="content">
-                    <div class="module">
-                        <div class="module-head">
-                            <h3>My Projects</h3>
-                        </div>
-                        <div class="module-body">
-                            <div class="stream-list">
+                    <h:form>
+                        <div class="module">
+                            <div class="module-head">
+                                <h3>My Projects</h3>
+                            </div>
+                            <div class="module-body">
+                                <div class="stream-list">
 
-                                <!-- REPETED PART -->
-                                <ui:repeat var="p" value="#{userController.user.projects}" varStatus="status">
-                                    <div class="media stream">
-                                        <img class="media-avatar medium pull-left" src="../resources/images/user.png" />
-                                        <div class="media-body">
-                                            <div class="stream-headline">
-                                                <h5 class="stream-author">
-                                                    #{p.name}
-                                                    <small>#{p.user.firstName} #{p.user.lastName}</small>
-                                                </h5>
-                                                <div class="stream-text">
-                                                    <p>#{p.projectAbstract}</p>
+                                    <!-- REPETED PART -->
+                                    <ui:repeat var="p" value="#{userController.user.projects}" varStatus="status">
+                                        <div class="media stream">
+                                            <img class="media-avatar medium pull-left" src="../resources/images/user.png" />
+                                            <div class="media-body">
+                                                <div class="stream-headline">
+                                                    <h5 class="stream-author">
+                                                        #{p.name}
+                                                        <small>#{p.user.firstName} #{p.user.lastName}</small>
+                                                    </h5>
+                                                    <div class="stream-text">
+                                                        <p>#{p.projectAbstract}</p>
+                                                    </div>
+                                                    <div class="stream-text">
+                                                        <ol class="inline">
+                                                            <ui:repeat var="k" value="#{p.keywords}" varStatus="status">
+                                                                <li><h:commandLink action="#{'/'.concat(searchController.search(k))}">##{k}</h:commandLink></li>
+                                                            </ui:repeat>
+                                                        </ol>
+                                                    </div>
                                                 </div>
-                                                <div class="stream-text">
-                                                    <ol class="inline">
-                                                        <ui:repeat var="k" value="#{p.keywords}" varStatus="status">
-                                                            <li><a href="#">##{k}</a></li>
-                                                        </ui:repeat>
-                                                    </ol>
+                                                <div class="stream-options">
+                                                    <a href="projectDetails.xhtml?id=#{p.id}" class="btn btn-small">
+                                                        <i class="icon-eye-open shaded"></i>
+                                                        View
+                                                    </a>
+                                                    <a href="updateProject.xhtml?id=#{p.id}" class="btn btn-small">
+                                                        <i class="icon-edit shaded"></i>
+                                                        Edit
+                                                    </a>
+                                                    <a href="checkStatus.xhtml?id=#{p.id}" class="btn btn-small">
+                                                        <i class="icon-refresh shaded"></i>
+                                                        Check Status
+                                                    </a>
                                                 </div>
-                                            </div>
-                                            <div class="stream-options">
-                                                <a href="projectDetails.xhtml?id=#{p.id}" class="btn btn-small">
-                                                    <i class="icon-eye-open shaded"></i>
-                                                    View
-                                                </a>
-                                                <a href="updateProject.xhtml?id=#{p.id}" class="btn btn-small">
-                                                    <i class="icon-edit shaded"></i>
-                                                    Edit
-                                                </a>
-                                                <a href="checkStatus.xhtml?id=#{p.id}" class="btn btn-small">
-                                                    <i class="icon-refresh shaded"></i>
-                                                    Check Status
-                                                </a>
-                                            </div>
-                                            <br/>
-                                            <div class="stream-options">
-                                                <h5>Submissions: <h:outputText value="#{p.findStatusPercentage()}"/></h5>
-                                                <h:link value="Submit Preliminary Proposal" outcome="submitFiles" class="btn btn-small" rendered="#{!p.preliminaryOk}">
-                                                    <f:param name="id" value="#{p.id}" />
-                                                    <f:param name="type" value="Preliminary"/>
-                                                </h:link>
-                                                <h:link value="Submit Preliminary Proposal" outcome="submitFiles" class="btn btn-small btn-success disabled" rendered="#{p.preliminaryOk}">
-                                                    <f:param name="id" value="#{p.id}" />
-                                                    <f:param name="type" value="Preliminary"/>
-                                                </h:link>
-                                                
-                                                <h:link value="Submit Final Proposal" outcome="submitFiles" class="btn btn-small" rendered="#{!p.finalOk}">
-                                                    <f:param name="id" value="#{p.id}" />
-                                                    <f:param name="type" value="Final"/>
-                                                </h:link>
-                                                <h:link value="Submit Final Proposal" outcome="submitFiles" class="btn btn-small btn-success disabled" rendered="#{p.finalOk}">
-                                                    <f:param name="id" value="#{p.id}" />
-                                                    <f:param name="type" value="Final"/>
-                                                </h:link>
-                                                
-                                                <h:link value="Submit Presentation Scheduling" outcome="submitFiles" class="btn btn-small" rendered="#{!p.presentationOk}">
-                                                    <f:param name="id" value="#{p.id}" />
-                                                    <f:param name="type" value="Presentation"/>
-                                                </h:link>
-                                                <h:link value="Submit Presentation Scheduling" outcome="submitFiles" class="btn btn-small btn-success disabled" rendered="#{p.presentationOk}">
-                                                    <f:param name="id" value="#{p.id}" />
-                                                    <f:param name="type" value="Presentation"/>
-                                                </h:link>
-                                                    
+                                                <br/>
+                                                <div class="stream-options">
+                                                    <h5>Submissions: <h:outputText value="#{p.findStatusPercentage()}"/></h5>
+                                                    <h:link value="Submit Preliminary Proposal" outcome="submitFiles" class="btn btn-small" rendered="#{!p.preliminaryOk}">
+                                                        <f:param name="id" value="#{p.id}" />
+                                                        <f:param name="type" value="Preliminary"/>
+                                                    </h:link>
+                                                    <h:link value="Submit Preliminary Proposal" outcome="submitFiles" class="btn btn-small btn-success disabled" rendered="#{p.preliminaryOk}">
+                                                        <f:param name="id" value="#{p.id}" />
+                                                        <f:param name="type" value="Preliminary"/>
+                                                    </h:link>
+
+                                                    <h:link value="Submit Final Proposal" outcome="submitFiles" class="btn btn-small" rendered="#{!p.finalOk}">
+                                                        <f:param name="id" value="#{p.id}" />
+                                                        <f:param name="type" value="Final"/>
+                                                    </h:link>
+                                                    <h:link value="Submit Final Proposal" outcome="submitFiles" class="btn btn-small btn-success disabled" rendered="#{p.finalOk}">
+                                                        <f:param name="id" value="#{p.id}" />
+                                                        <f:param name="type" value="Final"/>
+                                                    </h:link>
+
+                                                    <h:link value="Submit Presentation Scheduling" outcome="submitFiles" class="btn btn-small" rendered="#{!p.presentationOk}">
+                                                        <f:param name="id" value="#{p.id}" />
+                                                        <f:param name="type" value="Presentation"/>
+                                                    </h:link>
+                                                    <h:link value="Submit Presentation Scheduling" outcome="submitFiles" class="btn btn-small btn-success disabled" rendered="#{p.presentationOk}">
+                                                        <f:param name="id" value="#{p.id}" />
+                                                        <f:param name="type" value="Presentation"/>
+                                                    </h:link>
+
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </ui:repeat>
-                                <!-- END REPETED PART -->
+                                    </ui:repeat>
+                                    <!-- END REPETED PART -->
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-
+                    </h:form>
                 </div>
             </div>
         </ui:define>

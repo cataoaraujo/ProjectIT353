@@ -45,7 +45,7 @@
                                                     <div class="stream-text">
                                                         <ol class="inline">
                                                             <ui:repeat var="k" value="#{p.keywords}" varStatus="status">
-                                                                <li><a href="#">##{k}</a></li>
+                                                                <li><h:commandLink action="#{''.concat(searchController.search(k))}">##{k}</h:commandLink></li>
                                                             </ui:repeat>
                                                         </ol>
                                                     </div>

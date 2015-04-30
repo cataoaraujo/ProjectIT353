@@ -4,7 +4,7 @@
       xmlns:f="http://java.sun.com/jsf/core" 
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    
+
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
@@ -17,7 +17,7 @@
                 <div class="nav-collapse collapse navbar-inverse-collapse">
                     <h:form class="navbar-search pull-left input-append">
                         <h:inputText id="searchQuery" class="span3" value="#{searchController.query}"/>
-                        <h:commandLink class="btn" action="#{'/'.concat(searchController.search())}"><i class="icon-search"></i></h:commandLink>
+                        <h:commandLink class="btn" action="#{'/'.concat(searchController.search(''))}"><i class="icon-search"></i></h:commandLink>
                     </h:form>
                     <h:form>
                         <ul class="nav pull-right">
@@ -40,5 +40,5 @@
             </div>
         </div>
     </div>
-    
+
 </html>
