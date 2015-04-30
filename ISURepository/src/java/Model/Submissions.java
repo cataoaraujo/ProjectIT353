@@ -169,7 +169,7 @@ public class Submissions {
         ArrayList<Committee> committees = new ArrayList<>();
         Connection conn = Database.connect2DB();
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Committee WHERE project_id = ?");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Committee WHERE project_id = ? ORDER BY (type = 'Chair') DESC, type DESC");
             ps.setInt(1, project.getId());
             ResultSet result = ps.executeQuery();
             while (result.next()) {
