@@ -22,50 +22,58 @@
                         <div class="module-head">
                             <h3>Check Status</h3>
                         </div>
-                        <div class="module-body">
-                            <div class="stream-list">
+                        <div class="module-body table"> 
 
-                                <!-- REPETED PART -->
-                                <ui:repeat var="s" value="#{projectController.project.submissions}" varStatus="status">
-                                    <div class="media stream">
-                                        <div class="media-body">
-                                            <div class="stream-headline">
-                                                <h5 class="stream-author">
-                                                    #{s.type}
-                                                    <small>Approved: #{s.approved}</small>
-                                                </h5>
-                                                <div class="stream-text">
-                                                    <ui:repeat var="c" value="#{s.committee}" varStatus="status">
-                                                        <h5>#{c.name} - #{c.type}</h5>
-                                                        <p>Approved: #{c.approved}</p>
-                                                        <p>Comment: #{c.comment}</p>
-                                                    </ui:repeat>
-                                                </div>
+                            <h:dataTable value="#{projectController.project.submissions}" var="s"
+                                         styleClass="datatable-1 table table-striped display"
+                                         cellpadding="0" cellspacing="0" border="0"
+                                         width="100%">
+                                <h:column>    				
+                                    <f:facet name="header">Type</f:facet>    				
+                                        #{s.type}
+                                </h:column>
+                                <h:column>    				
+                                    <f:facet name="header">Committee</f:facet>   
+                                    <h:dataTable  var="c" value="#{s.committee}" cellpadding="0" cellspacing="0" border="0" width="100%">
+                                        <h:column> 
+                                            <h5>#{c.name} - #{c.type}</h5>
+                                        </h:column>
+                                        <h:column>
+
+                                            Comment: #{c.comment}
+                                        </h:column>
+                                        <h:column> 
+                                            <h:form>
+                                                <h:commandLink action="#" rendered="#{c.approved}" styleClass="btn btn-success disable"><i class="menu-icon icon-ok"></i></h:commandLink>
+                                                <h:commandLink action="#" rendered="#{!c.approved}" styleClass="btn btn-danger disable"><i class="menu-icon icon-remove"></i></h:commandLink>
+                                            </h:form>
+                                        </h:column>
+                                    </h:dataTable>
+                                </h:column>
+                            </h:dataTable>
+
+                            <h:panelGroup layout="block" rendered="#{!projectController.project.hasSubmissions()}">
+                                <div class="media stream">
+                                    <div class="media-body">
+                                        <div class="stream-headline">
+                                            <div class="alert-error alert">
+                                                You do not have any update
                                             </div>
                                         </div>
                                     </div>
-                                </ui:repeat>
-                                <!-- END REPETED PART -->
-                                
-                                <h:panelGroup layout="block" rendered="#{!projectController.project.hasSubmissions()}">
-                                     <div class="media stream">
-                                        <div class="media-body">
-                                            <div class="stream-headline">
-                                                <div class="alert-error alert">
-                                                   You do not have any update
-                                                </div>
-                                            </div>
-                                        </div>
-                                     </div>
-                                </h:panelGroup>
-
-                            </div>
+                                </div>
+                            </h:panelGroup>
                         </div>
                     </div>
-
                 </div>
             </div>
         </ui:define>
+
+        <ui:define name="scripts">
+            <script src="/ISURepository/resources/scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
+            <script src="/ISURepository/resources/scripts/common.js" type="text/javascript"></script>
+        </ui:define>
+
     </ui:composition>
 </html>
 
