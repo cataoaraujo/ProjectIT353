@@ -11,6 +11,7 @@ import Model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -133,6 +134,28 @@ public class AdminController {
             System.out.println(e);
         }
         return count;
+    }
+    
+    public ArrayList<ArrayList<String>> countProjectCourses() {
+        ArrayList<ArrayList<String>> courses = new ArrayList<>();
+
+        Connection conn = Database.connect2DB();
+        try {
+          PreparedStatement ps = conn.prepareStatement("SELECT COUNT(PROJECT.COURSENUMBER) AS CCNUMBER, PROJECT.COURSENUMBER FROM PROJECT  GROUP BY PROJECT.COURSENUMBER ORDER BY CCNUMBER DESC");
+            ps.setMaxRows(4);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                ArrayList<String> c = new ArrayList<>();
+                int porcentage = (int)(result.getInt("CCNUMBER")*100/countTheses());
+                c.add(result.getString("COURSENUMBER"));
+                c.add(porcentage+"%");
+                courses.add(c);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+
+        return courses;
     }
 
 
