@@ -20,7 +20,7 @@ public class Database {
         Connection DBConn = null;
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
-            DBConn = DriverManager.getConnection("jdbc:derby://localhost:1527/FinalProject", "itkstu", "student");
+            DBConn = DriverManager.getConnection("jdbc:derby://gfish2.it.ilstu.edu:1527/rcataoa_ISURepository", "itkstu", "gopher");
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println(e.getMessage());
         }

@@ -497,7 +497,7 @@ public class Project {
     protected void retrieveProjectCommittee() {
         Connection conn = Database.connect2DB();
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Committee WHERE project_id = ? ");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Committee WHERE project_id = ? ORDER BY (type = 'Chair') DESC, type DESC");
             ps.setInt(1, id);
             ResultSet result = ps.executeQuery();
             while (result.next()) {
@@ -582,7 +582,12 @@ public class Project {
     }
 
     public String getScreencastLink() {
-        return screencastLink;
+        if (screencastLink != null) {
+            screencastLink = screencastLink.replaceAll("http://", "");
+        } else {
+            return "";
+        }
+        return "http://" + screencastLink;
     }
 
     public void setScreencastLink(String screencastLink) {
