@@ -1,4 +1,13 @@
-﻿
+﻿Drop table UserAccount;
+Drop table Project;
+Drop table Committee;
+Drop table ProjectSubmission;
+Drop table Approval;
+Drop table ProjectStatistics;
+Drop table Keyword;
+Drop table ProjectKeywords;
+Drop table Subscribers;
+
 CREATE TABLE UserAccount
 (
 id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
@@ -21,7 +30,7 @@ name varchar(128) NOT NULL,
 student_id int NOT NULL,
 courseNumber varchar(15),
 liveLink varchar(128),
-abstract varchar(128),
+abstract varchar(512),
 screencastLink varchar(128),
 semester varchar(20),
 dateCreated TIMESTAMP,
