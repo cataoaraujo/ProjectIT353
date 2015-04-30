@@ -18,20 +18,15 @@
                     <a href="usersAccounts.xhtml">
                         <i class="menu-icon icon-user"></i>
                         User Accounts
+                         <h:panelGroup layout="block" rendered="#{adminController.toBeApproved()}">
                         <b class="label orange pull-right">#{adminController.unapprovedUsers.size()}</b>
+                         </h:panelGroup>
                     </a>
                 </li>
                 <li>
                     <a href="adminTheses.xhtml">
                         <i class="menu-icon icon-copy"></i>
                         Theses
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="menu-icon icon-tasks"></i>
-                        Tasks
-                        <b class="label orange pull-right">19</b>
                     </a>
                 </li>
             </ul>

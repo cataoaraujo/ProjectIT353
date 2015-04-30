@@ -21,7 +21,7 @@
                     <div class="content">
                         <div class="module">
                             <div class="module-head">
-                                 <h3>New Projects</h3>
+                                <h3>New Projects</h3>
                             </div>
                             <div class="module-body">
                                 <div class="stream-list">
@@ -52,14 +52,18 @@
                                                         <i class="icon-plus shaded"></i>
                                                         More details
                                                     </a>
-                                                    <a href="#{p.liveLink}" class="btn btn-small">
-                                                        <i class="icon-cloud shaded"></i>
-                                                        Live version
-                                                    </a>
-                                                    <a href="#" class="btn btn-small disabled">
-                                                        <i class="icon-reply shaded"></i>
-                                                        Export
-                                                    </a>
+                                                    <h:panelGroup layout="block" rendered="#{userController.logged}">
+                                                        <a href="#{p.liveLink}" class="btn btn-small">
+                                                            <i class="icon-cloud shaded"></i>
+                                                            Live version
+                                                        </a>
+                                                    </h:panelGroup>
+                                                    <h:panelGroup layout="block" rendered="#{userController.logged}">
+                                                        <a href="#" class="btn btn-small disabled" rendered="#{userController.logged}">
+                                                            <i class="icon-reply shaded"></i>
+                                                            Export
+                                                        </a>
+                                                    </h:panelGroup>
                                                 </div>
                                             </div>
                                         </div>

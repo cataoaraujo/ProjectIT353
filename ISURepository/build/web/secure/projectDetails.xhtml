@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <ui:composition template="/templates/content.xhtml">
@@ -10,7 +11,8 @@
         </ui:define>
 
         <ui:define name="sidebar">
-           <ui:include src="../templates/sidebar.xhtml"/>
+            <ui:include src="/secure/sidebar.xhtml"/>
+
         </ui:define>
 
         <ui:define name="content">
@@ -100,37 +102,39 @@
                         </div>
                         <br/>
                         <br/>
-                        <div class="module-head">
-                            <h3>Related Projects</h3>
-                        </div>
-                        <div class="module-body row-fluid">
-                            <ui:repeat var="rp" value="#{projectController.project.findRelatedProjects(projectController.project.id)}" varStatus="status">
-                                <div class="span4">
-                                    <h5 class="stream-author">
-                                        #{rp.name}
-                                    </h5>
-                                    <div class="stream-headline">
-                                        <div class="stream-text">   
-                                            <ol class="inline">
-                                                <ui:repeat var="k" value="#{rp.keywords}" varStatus="status">
-                                                    <li><a href="#">##{k}</a></li>
-                                                </ui:repeat>
-                                            </ol>
+                        <h:panelGroup layout="block" rendered="#{projectController.project.findRelatedProjects(projectController.project.id)}">
+                            <div class="module-head">
+                                <h3>Related Projects</h3>
+                            </div>
+                            <div class="module-body row-fluid">
+                                <ui:repeat var="rp" value="#{projectController.project.relatedProjects}" varStatus="status">
+                                    <div class="span4">
+                                        <h5 class="stream-author">
+                                            #{rp.name}
+                                        </h5>
+                                        <div class="stream-headline">
+                                            <div class="stream-text">   
+                                                <ol class="inline">
+                                                    <ui:repeat var="k" value="#{rp.keywords}" varStatus="status">
+                                                        <li><a href="#">##{k}</a></li>
+                                                    </ui:repeat>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                        <div class="stream-options">
+                                            <a href="projectDetails.xhtml?id=#{rp.id}" class="btn btn-small">
+                                                <i class="icon-plus shaded"></i>
+                                                More details
+                                            </a>
+                                            <a href="#{rp.liveLink}" class="btn btn-small">
+                                                <i class="icon-cloud shaded"></i>
+                                                Live version
+                                            </a>
                                         </div>
                                     </div>
-                                    <div class="stream-options">
-                                        <a href="projectDetails.xhtml?id=#{rp.id}" class="btn btn-small">
-                                            <i class="icon-plus shaded"></i>
-                                            More details
-                                        </a>
-                                        <a href="#{rp.liveLink}" class="btn btn-small">
-                                            <i class="icon-cloud shaded"></i>
-                                            Live version
-                                        </a>
-                                    </div>
-                                </div>
-                            </ui:repeat>
-                        </div>
+                                </ui:repeat>
+                            </div>
+                        </h:panelGroup>
                     </div>
 
                 </div>

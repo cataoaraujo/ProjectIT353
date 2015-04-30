@@ -192,5 +192,18 @@ public class AdminController {
         return null;
     }
     
+    public boolean toBeApproved(){
+        
+        boolean toProcess = true;
+    
+        if(getUnapprovedUsers().size() > 0 )
+            toProcess = true;
+        else
+            toProcess = false;
+        
+        return toProcess;
+        
+    }
+    
     
 }

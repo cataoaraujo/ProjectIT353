@@ -8,7 +8,7 @@
     <ui:composition template="/templates/content.xhtml">
 
         <ui:define name="nav">
-            <ui:include src="templates/navcancel.xhtml"/>
+            <ui:include src="templates/nav.xhtml"/>
         </ui:define>
 
         <ui:define name="sidebar">
@@ -17,7 +17,7 @@
 
         <ui:define name="content">
             <f:event listener="#{userController.cleanError}" type="preRenderView" />
-            <div class="module span8 offset2">
+            <div class="module span6 offset3">
                 <h:form class="form-vertical">
                     <div class="module-head">
                         <h3>Subscribe To Projects</h3>
@@ -46,7 +46,7 @@
                 </h:form>
             </div>
             
-            <div class="module span8 offset2">
+            <div class="module span6 offset3">
                 <h:form class="form-vertical">
                     <div class="module-head">
                         <h3>Unsubscribe</h3>

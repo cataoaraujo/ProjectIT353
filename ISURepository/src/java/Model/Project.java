@@ -32,6 +32,7 @@ public class Project {
     private String semester;
     private Date dateCreated;
     private boolean highlighted;
+    private ArrayList<Project> relatedProjects;
 
     private ArrayList<Submissions> submissions = new ArrayList<>();
     private ArrayList<Committee> committeeMembers = new ArrayList<>();
@@ -40,6 +41,20 @@ public class Project {
 
     private int views;
     private int downloads;
+
+    /**
+     * @return the relatedProjects
+     */
+    public ArrayList<Project> getRelatedProjects() {
+        return relatedProjects;
+    }
+
+    /**
+     * @param relatedProjects the relatedProjects to set
+     */
+    public void setRelatedProjects(ArrayList<Project> relatedProjects) {
+        this.relatedProjects = relatedProjects;
+    }
 
     public enum Situation {
 
@@ -272,8 +287,9 @@ public class Project {
         return projects;
     }
 
-    public static ArrayList<Project> findRelatedProjects(int id) {
+    public boolean findRelatedProjects(int id) {
         ArrayList<Project> projects = new ArrayList<>();
+        boolean found = false;
         
         System.out.println("parameter "+id);
 
@@ -298,8 +314,13 @@ public class Project {
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
+        
+        setRelatedProjects(projects);
+        
+        if(projects.size() > 0)
+            found = true;
 
-        return projects;
+        return found;
     }
 
     protected void retrieveProjectKeywords() {
@@ -590,5 +611,5 @@ public class Project {
     public void setDownloads(int downloads) {
         this.downloads = downloads;
     }
-
+    
 }
