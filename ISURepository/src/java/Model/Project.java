@@ -6,6 +6,7 @@
 package Model;
 
 import Database.Database;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +16,9 @@ import java.text.SimpleDateFormat;
 //import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import org.primefaces.model.DefaultStreamedContent;
 
 /**
  *
@@ -60,7 +64,7 @@ public class Project {
 
         Done, Available, Unavailable, Submitted
     }
-	
+
     public boolean add() {
         Connection conn = Database.connect2DB();
         try {
@@ -199,6 +203,8 @@ public class Project {
                 p.setDateCreated(result.getDate("datecreated"));
                 p.setHighlighted(result.getBoolean("highlighted"));
                 p.retrieveProjectKeywords();
+                p.retrieveProjectSubmissions();
+                p.retrieveProjectCommittee();
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
@@ -230,7 +236,7 @@ public class Project {
                 ps.setString(3, "%" + keyword + "%");
                 ps.setString(4, "%" + keyword + "%");
                 ps.setString(5, "%" + keyword + "%");
-                ps.setMaxRows(20); 
+                ps.setMaxRows(20);
                 ResultSet result = ps.executeQuery();
                 while (result.next()) {
                     Project p = Project.findById(result.getInt("ID"));
@@ -243,7 +249,7 @@ public class Project {
         return projects;
     }
 
-     public static ArrayList<Project> findShocase() {
+    public static ArrayList<Project> findShocase() {
         ArrayList<Project> projects = new ArrayList<>();
 
         Connection conn = Database.connect2DB();
@@ -273,7 +279,7 @@ public class Project {
             PreparedStatement ps = conn.prepareStatement(""
                     + "SELECT PROJECT.ID "
                     + "FROM PROJECT "
-                    + "ORDER BY PROJECT.DATECREATED");
+                    + "ORDER BY PROJECT.DATECREATED DESC");
             ps.setMaxRows(10);
             ResultSet result = ps.executeQuery();
             while (result.next()) {
@@ -290,35 +296,32 @@ public class Project {
     public boolean findRelatedProjects(int id) {
         ArrayList<Project> projects = new ArrayList<>();
         boolean found = false;
-        
-        System.out.println("parameter "+id);
+
+        System.out.println("parameter " + id);
 
         Connection conn = Database.connect2DB();
         try {
-            PreparedStatement ps = conn.prepareStatement(""
-                    + "SELECT PROJECT.ID FROM PROJECT, ProjectKeywords "
-                    + "WHERE PROJECT.ID = ProjectKeywords.project_id "
-                    + "AND ProjectKeywords.keyword_id IN("
-                    + "SELECT ProjectKeywords.keyword_id FROM PROJECT, ProjectKeywords "
-                    + "WHERE PROJECT.ID = ProjectKeywords.project_id "
-                    + "AND PROJECT.ID = ?)"
-                    + "AND PROJECT.ID != ?");
-            ps.setInt(1,id);
-            ps.setInt(2,id);
+            PreparedStatement ps = conn.prepareStatement("SELECT DISTINCT project_id FROM ProjectKeywords "
+                    + " WHERE project_id != ? "
+                    + " AND keyword_id "
+                    + " IN(SELECT keyword_id FROM ProjectKeywords WHERE project_id = ?)");
+            ps.setInt(1, id);
+            ps.setInt(2, id);
             ps.setMaxRows(3);
             ResultSet result = ps.executeQuery();
             while (result.next()) {
-                Project p = Project.findById(result.getInt("ID"));
+                Project p = Project.findById(result.getInt("project_id"));
                 projects.add(p);
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
-        
+
         setRelatedProjects(projects);
-        
-        if(projects.size() > 0)
+
+        if (projects.size() > 0) {
             found = true;
+        }
 
         return found;
     }
@@ -338,8 +341,8 @@ public class Project {
             System.out.println(ex.toString());
         }
     }
-	
-	public void updateHighlighted(boolean highlighted) {
+
+    public void updateHighlighted(boolean highlighted) {
         this.highlighted = highlighted;
         Connection conn = Database.connect2DB();
         try {
@@ -380,8 +383,8 @@ public class Project {
             System.out.println(ex.toString());
         }
     }
-	
-	public String findStatusPercentage() {
+
+    public String findStatusPercentage() {
         Situation s1 = presentationStatus();
         if (s1.equals(Situation.Done)) {
             return "100% Completed!";
@@ -481,6 +484,59 @@ public class Project {
             }
         }
         return s;
+    }
+
+    protected void retrieveProjectSubmissions() {
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM ProjectSubmission WHERE project_id = ? ");
+            ps.setInt(1, id);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                Submissions s = new Submissions();
+                s.setApproved(result.getBoolean("approved"));
+                s.setType(result.getString("type"));
+                Blob blob = result.getBlob("document");
+                s.setDocument(blob.getBinaryStream());
+                s.file = new DefaultStreamedContent(s.getDocument(), "image/jpg", "file.jpg");
+                s.setProject(this);
+                s.setId(result.getInt("submission_id"));
+                s.setCommittee(s.findCommittee());
+                this.submissions.add(s);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
+
+    protected void retrieveProjectCommittee() {
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Committee WHERE project_id = ? ");
+            ps.setInt(1, id);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                Committee c = new Committee();
+                c.setId(result.getInt("commitee_id"));
+                c.setProject(this);
+                c.setName(result.getString("committeename"));
+                c.setEmail(result.getString("committeeemail"));
+                switch (result.getString("type")) {
+                    case "Chair":
+                        c.setType(Committee.CommitteeType.Chair);
+                        break;
+                    case "Member":
+                        c.setType(Committee.CommitteeType.Member);
+                        break;
+                    case "Advisor":
+                        c.setType(Committee.CommitteeType.Advisor);
+                        break;
+                }
+                this.committeeMembers.add(c);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
     }
 
     public void addCommittee(Committee committee) {
@@ -611,5 +667,5 @@ public class Project {
     public void setDownloads(int downloads) {
         this.downloads = downloads;
     }
-    
+
 }

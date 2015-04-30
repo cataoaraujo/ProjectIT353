@@ -6,9 +6,8 @@
 package Model;
 
 import Database.Database;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +23,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -34,10 +35,58 @@ public class Submissions {
     private int id;
     private Project project;
     private InputStream document;
+    StreamedContent file;
     private String type;
     private boolean approved;
     private Date dateSubmitted;
+    private ArrayList<Committee> committee = new ArrayList<>();
 
+    
+    
+    public StreamedContent download() {
+        return file;
+    }
+    
+    public static Submissions findByID(int id) {
+        Submissions s = null;
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM ProjectSubmission WHERE submission_id = ? ");
+            ps.setInt(1, id);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                s = new Submissions();
+                s.setId(id);
+                s.setApproved(result.getBoolean("approved"));
+                s.setType(result.getString("type"));
+                getBlob(s);
+                s.setProject(Project.findById(result.getInt("project_id")));
+                s.setId(result.getInt("submission_id"));
+                s.setCommittee(s.findCommittee());
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return s;
+    }
+    
+    private static void getBlob(Submissions s){
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT document FROM ProjectSubmission WHERE submission_id = ? ");
+            ps.setInt(1, s.id);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                Blob blob = result.getBlob("document");
+                s.setDocument(blob.getBinaryStream());
+                s.file = new DefaultStreamedContent(s.getDocument(), "image/jpg", "file.jpg");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
+    
+    
     public boolean submit() {
         Connection conn = Database.connect2DB();
         try {
@@ -139,12 +188,29 @@ public class Submissions {
                         c.setType(Committee.CommitteeType.Advisor);
                         break;
                 }
+                this.findCommitteeComment(c);
                 committees.add(c);
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
         return committees;
+    }
+    
+    private void findCommitteeComment(Committee committee){
+        Connection conn = Database.connect2DB();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Approval WHERE submission_id = ? AND committee_id = ?");
+            ps.setInt(1, this.id);
+            ps.setInt(2, committee.getId());
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                committee.setComment(result.getString("committeecomment"));
+                committee.setApproved(result.getBoolean("approved"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
     }
 
     public boolean sendEmailApproval() {
@@ -252,4 +318,12 @@ public class Submissions {
         this.dateSubmitted = dateSubmitted;
     }
 
+    public ArrayList<Committee> getCommittee() {
+        return committee;
+    }
+
+    public void setCommittee(ArrayList<Committee> committee) {
+        this.committee = committee;
+    }
+   
 }

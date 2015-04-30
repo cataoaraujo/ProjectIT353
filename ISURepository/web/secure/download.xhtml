@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/templates/content.xhtml">
+
+        <ui:define name="nav">
+            <ui:include src="/secure/navLogged.xhtml"/>
+        </ui:define>
+
+        <ui:define name="sidebar">
+            <ui:include src="/secure/sidebar.xhtml"/>
+
+        </ui:define>
+
+        <ui:define name="content">
+            <f:metadata>
+                <f:viewParam name="pID" value="#{downloadController.projectID}"/>
+                <f:viewParam name="sID" value="#{downloadController.submissionID}"/>
+            </f:metadata>
+            <f:event listener="#{downloadController.init}" type="preRenderView" />
+            <div class="span9">
+                <div class="content">
+                    <div class="module">
+                        <div class="module-head">
+                            <h3>Project: #{downloadController.project.name}</h3>
+                        </div>
+                        <div class="module-body">
+                            <div class="stream-list">
+                                <div class="media stream">
+                                    <div class="media-body">
+                                        <div class="stream-headline">
+                                            <h5 class="stream-author">
+                                                <h:form>
+                                                    <p:commandButton value="Download" ajax="false" icon="ui-icon-arrowthick-1-s">
+                                                        <p:fileDownload value="#{downloadController.submission.download}" />
+                                                    </p:commandButton>
+                                                </h:form>
+                                            </h5>
+                                        </div>
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

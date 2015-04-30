@@ -23,6 +23,8 @@ public class Committee {
     private String name;
     private String email;
     private CommitteeType type;
+    private String comment;
+    private boolean approved;
 
     public enum CommitteeType {
 
@@ -100,4 +102,20 @@ public class Committee {
         this.type = type;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+    
 }

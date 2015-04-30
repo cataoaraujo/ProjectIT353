@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/templates/content.xhtml">
+
+        <ui:define name="nav">
+            <ui:include src="/secure/navLogged.xhtml"/>
+        </ui:define>
+
+        <ui:define name="sidebar">
+            <ui:include src="/secure/sidebarSecure.xhtml"/>
+        </ui:define>
+
+        <ui:define name="content">
+            <div class="span9">
+                <div class="content">
+                    <div class="module">
+                        <div class="module-head">
+                            <h3>Check Status - #{projectController.project.name}</h3>
+                        </div>
+                        <div class="module-body">
+                            <div class="stream-list">
+
+                                <!-- REPETED PART -->
+                                <ui:repeat var="s" value="#{projectController.project.submissions}" varStatus="status">
+                                    <div class="media stream">
+                                        <div class="media-body">
+                                            <div class="stream-headline">
+                                                <h5 class="stream-author">
+                                                    #{s.type}
+                                                    <small>Approved: #{s.approved}</small>
+                                                </h5>
+                                                <div class="stream-text">
+                                                    <ui:repeat var="c" value="#{s.committee}" varStatus="status">
+                                                        <h5>#{c.name} - #{c.type}</h5>
+                                                        <p>Approved: #{c.approved}</p>
+                                                        <p>Comment: #{c.comment}</p>
+                                                    </ui:repeat>
+                                                </div>
+                                            </div>
+                                            <div class="stream-options">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+                                <!-- END REPETED PART -->
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
+
