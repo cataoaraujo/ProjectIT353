@@ -88,9 +88,9 @@
                                                 <h5>Documents:</h5> 
                                                 <h:form>
                                                     <ui:repeat var="s" value="#{projectController.project.submissions}" varStatus="status">
-                                                        <h:outputLink  value="#" class="btn btn-small" >
+                                                        <a href="#" class="btn btn-small">
                                                             <i class="icon-paper-clip shaded"></i> #{s.type}
-                                                        </h:outputLink> 
+                                                        </a>
                                                     </ui:repeat>
                                                 </h:form>
                                             </div>
